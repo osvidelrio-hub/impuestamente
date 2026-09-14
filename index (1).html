@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="es-CO">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Impuestamente | Declaración de Renta y Planeación Tributaria para Personas Naturales</title>
+  <meta name="description" content="Asesoría en declaración de renta, planeación tributaria y seguridad social para personas naturales en Colombia. Herramientas gratuitas y acompañamiento experto.">
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink:#0b1f33; --blue:#123c69; --teal:#0b7a75; --orange:#eb8a28; --mist:#edf4f4; --line:#d7e2e5;
+      --teal-glow: rgba(11,122,117,.35); --orange-glow: rgba(235,138,40,.4);
+    }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; font-family:"DM Sans",sans-serif; color:var(--ink); background-color:#f8fafc; }
+    .display-font { font-family:"Space Grotesk","DM Sans",sans-serif; letter-spacing:-0.02em; }
+
+    .hero-pattern {
+      position: relative; overflow: hidden; background-color:#0b1f33;
+      background-image: radial-gradient(circle at 85% 20%, rgba(235,138,40,.25), transparent 35%), linear-gradient(135deg, rgba(11,122,117,.4), transparent 50%);
+    }
+    .hero-blob {
+      position: absolute; border-radius: 9999px; filter: blur(48px); opacity: .55; pointer-events: none;
+      animation: floatBlob 12s ease-in-out infinite; z-index: 0;
+      transform: translateZ(0); -webkit-transform: translateZ(0); will-change: transform;
+      -webkit-backface-visibility: hidden; backface-visibility: hidden;
+    }
+    .hero-blob.b1 { width: 340px; height: 340px; background: radial-gradient(circle, var(--teal-glow), transparent 70%); top: -100px; left: -80px; }
+    .hero-blob.b2 { width: 300px; height: 300px; background: radial-gradient(circle, var(--orange-glow), transparent 70%); bottom: -120px; right: -60px; animation-delay: -4s; }
+    .hero-blob.b3 { width: 220px; height: 220px; background: radial-gradient(circle, rgba(255,255,255,.12), transparent 70%); top: 40%; right: 15%; animation-delay: -8s; }
+    @keyframes floatBlob { 0%,100% { transform: translate(0,0) translateZ(0) scale(1); } 50% { transform: translate(18px,-22px) translateZ(0) scale(1.08); } }
+    .hero-inner { position: relative; z-index: 1; }
+    @supports not (filter: blur(1px)) { .hero-blob { display: none; } }
+
+    .grid-lines { background-image:linear-gradient(rgba(18,60,105,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(18,60,105,.04) 1px,transparent 1px); background-size:24px 24px; }
+
+    .card-hover { transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.35s ease, border-color 0.35s ease; }
+    .card-hover:hover { transform: translateY(-6px); box-shadow: 0 22px 40px -12px rgba(11,122,117,.25), 0 8px 16px -8px rgba(11,31,51,.15); border-color: #0b7a75; }
+
+    .btn-pulse { animation: pulse-subtle 2s infinite; }
+    @keyframes pulse-subtle { 0%,100% { transform: scale(1); box-shadow: 0 4px 20px rgba(235,138,40,.3); } 50% { transform: scale(1.02); box-shadow: 0 8px 32px rgba(235,138,40,.55); } }
+    .btn-shine { position: relative; overflow: hidden; }
+    .btn-shine::after { content:""; position:absolute; top:0; left:-75%; width:50%; height:100%; background:linear-gradient(120deg, transparent, rgba(255,255,255,.55), transparent); transform: skewX(-20deg); transition: left .6s ease; }
+    .btn-shine:hover::after { left: 125%; }
+
+    .reveal-up { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal-up.in-view { opacity: 1; transform: translateY(0); }
+
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+
+    .mobile-cta-bar {
+      position: fixed; left: 0; right: 0; bottom: 0; z-index: 60;
+      transform: translateY(110%); transition: transform .35s ease;
+      background: #0b1f33; border-top: 1px solid rgba(255,255,255,.08);
+      padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
+    }
+    @supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+      .mobile-cta-bar { background: rgba(11,31,51,.92); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+    }
+    .mobile-cta-bar.show { transform: translateY(0); }
+    @media (min-width: 768px) { .mobile-cta-bar { display: none; } }
+  </style>
+ </head>
+ <body class="w-full text-slate-900 antialiased">
+
+  <header class="w-full bg-[#0b1f33] px-4 py-4 border-b border-white/10 sticky top-0 z-50 backdrop-blur-md bg-opacity-95">
+   <nav class="mx-auto flex max-w-6xl items-center justify-between gap-4">
+    <a href="/" class="display-font flex items-center gap-2.5 text-white no-underline font-bold text-lg">
+     <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-[#0b7a75] shadow-md"><i data-lucide="landmark" class="text-white" width="20" height="20"></i></span>
+     <span>Impuesta<span class="text-[#eb8a28]">mente</span></span>
+    </a>
+    <div class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-300">
+     <a href="#servicios" class="no-underline hover:text-white transition">Servicios</a>
+     <a href="#sobre-mi" class="no-underline hover:text-white transition">Sobre mí</a>
+     <a href="/blog" class="no-underline hover:text-white transition">Blog</a>
+     <a href="#contacto" class="no-underline hover:text-white transition">Contacto</a>
+    </div>
+    <a href="/calculadora-renta" class="rounded-full bg-[#0b7a75] px-4 py-2 text-xs md:text-sm font-bold text-white no-underline transition hover:bg-[#09635f] shadow-sm">Diagnóstico Gratis</a>
+   </nav>
+  </header>
+
+  <main>
+   <!-- HERO -->
+   <section class="hero-pattern w-full px-4 py-16 md:px-10 md:py-24 text-white">
+    <div class="hero-blob b1"></div>
+    <div class="hero-blob b2"></div>
+    <div class="hero-blob b3"></div>
+    <div class="hero-inner mx-auto max-w-4xl text-center">
+     <span class="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5 text-xs font-semibold tracking-wide text-[#f5b15d] backdrop-blur-md border border-white/10">
+      <i data-lucide="shield-check" width="16" height="16"></i>
+      <span>Asesoría tributaria para personas naturales en Colombia</span>
+     </span>
+     <h1 class="display-font mt-6 font-bold leading-[1.05] tracking-tight" style="font-size: clamp(2rem, 5vw + 1rem, 3.75rem);">
+      Tu declaración de renta, <br class="hidden md:inline">
+      <span class="text-[#eb8a28]">sin dolores de cabeza</span>
+     </h1>
+     <p class="mx-auto mt-5 max-w-2xl text-base text-slate-300 md:text-lg leading-relaxed">
+      Contador especialista en impuestos para personas naturales. Descubre en segundos si estás obligado a declarar y recibe acompañamiento experto para hacerlo bien, sin sanciones ni sorpresas.
+     </p>
+     <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a href="/calculadora-renta" class="btn-pulse btn-shine flex w-full sm:w-auto items-center justify-center gap-3 rounded-xl bg-[#eb8a28] px-8 py-4 text-base font-bold text-[#0b1f33] no-underline transition hover:bg-[#f5b15d]">
+       <span>Hacer Diagnóstico Gratis</span>
+       <i data-lucide="arrow-right" width="20" height="20"></i>
+      </a>
+      <a href="#contacto" class="flex w-full sm:w-auto items-center justify-center gap-2 rounded-xl border border-white/20 px-8 py-4 text-base font-bold text-white no-underline transition hover:bg-white/10">
+       <span>Hablar con un contador</span>
+      </a>
+     </div>
+     <div class="mt-10 flex flex-wrap items-center justify-center gap-6 text-xs md:text-sm text-slate-300 border-t border-white/10 pt-6">
+      <span class="flex items-center gap-2"><i data-lucide="award" class="text-[#eb8a28]" width="16" height="16"></i> Contador Público titulado</span>
+      <span class="flex items-center gap-2"><i data-lucide="lock" class="text-[#eb8a28]" width="16" height="16"></i> Diagnóstico 100% privado</span>
+      <span class="flex items-center gap-2"><i data-lucide="message-circle" class="text-[#eb8a28]" width="16" height="16"></i> Respuesta por WhatsApp</span>
+     </div>
+    </div>
+   </section>
+
+   <!-- SERVICIOS -->
+   <section id="servicios" class="grid-lines w-full bg-[#edf4f4] px-4 py-16 md:px-10 md:py-24 border-y border-slate-200">
+    <div class="mx-auto max-w-6xl">
+     <div class="text-center max-w-2xl mx-auto">
+      <span class="text-xs font-bold uppercase tracking-widest text-[#0b7a75]">Servicios</span>
+      <h2 class="display-font mt-2 text-2xl font-bold text-[#0b1f33] md:text-4xl">Todo lo que necesitas para estar en regla</h2>
+      <p class="mt-2 text-slate-600 text-sm md:text-base">Acompañamiento tributario pensado para independientes, empleados y rentistas de capital.</p>
+     </div>
+
+     <div class="mt-12 grid gap-6 md:grid-cols-3">
+      <article class="card-hover rounded-2xl bg-white border border-slate-200 shadow-sm p-6 flex flex-col">
+       <span class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#0b7a75]/10 text-[#0b7a75]"><i data-lucide="file-text" width="24" height="24"></i></span>
+       <h3 class="display-font mt-4 font-bold text-lg text-[#0b1f33]">Declaración de Renta</h3>
+       <p class="mt-2 text-sm text-slate-600 leading-relaxed flex-1">Preparación y presentación de tu declaración ante la DIAN, con revisión de deducciones y beneficios que reducen tu impuesto a pagar.</p>
+       <a href="#contacto" class="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-[#0b7a75] no-underline hover:text-[#09635f]">Cotizar <i data-lucide="arrow-right" width="14" height="14"></i></a>
+      </article>
+
+      <article class="card-hover rounded-2xl bg-white border border-slate-200 shadow-sm p-6 flex flex-col">
+       <span class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#eb8a28]/10 text-[#eb8a28]"><i data-lucide="trending-up" width="24" height="24"></i></span>
+       <h3 class="display-font mt-4 font-bold text-lg text-[#0b1f33]">Planeación Tributaria</h3>
+       <p class="mt-2 text-sm text-slate-600 leading-relaxed flex-1">Estrategia personalizada durante el año para optimizar tu carga fiscal de forma legal, antes de que llegue la temporada de renta.</p>
+       <a href="#contacto" class="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-[#0b7a75] no-underline hover:text-[#09635f]">Cotizar <i data-lucide="arrow-right" width="14" height="14"></i></a>
+      </article>
+
+      <article class="card-hover rounded-2xl bg-white border border-slate-200 shadow-sm p-6 flex flex-col">
+       <span class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#123c69]/10 text-[#123c69]"><i data-lucide="shield-plus" width="24" height="24"></i></span>
+       <h3 class="display-font mt-4 font-bold text-lg text-[#0b1f33]">Seguridad Social</h3>
+       <p class="mt-2 text-sm text-slate-600 leading-relaxed flex-1">Liquidación correcta de aportes para independientes y por honorarios, evitando pagos de más o inconsistencias con la UGPP.</p>
+       <a href="#contacto" class="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-[#0b7a75] no-underline hover:text-[#09635f]">Cotizar <i data-lucide="arrow-right" width="14" height="14"></i></a>
+      </article>
+     </div>
+    </div>
+   </section>
+
+   <!-- CALCULADORA CTA -->
+   <section class="w-full bg-white px-4 py-16 md:px-10 md:py-20">
+    <div class="mx-auto max-w-4xl rounded-3xl bg-[#0b1f33] p-8 md:p-12 text-white text-center relative overflow-hidden">
+     <div class="hero-blob b1" style="opacity:.35;"></div>
+     <div class="relative z-10">
+      <span class="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5 text-xs font-semibold text-[#f5b15d]"><i data-lucide="calculator" width="14" height="14"></i> Herramienta gratuita</span>
+      <h2 class="display-font mt-4 text-2xl md:text-3xl font-bold">¿Estás obligado a declarar renta?</h2>
+      <p class="mt-2 text-slate-300 text-sm md:text-base max-w-xl mx-auto">Sube tu reporte de Información Exógena o digita tus valores. Te decimos en segundos si aplicas, bajo la normativa vigente para el año gravable 2025.</p>
+      <a href="/calculadora-renta" class="btn-shine mt-6 inline-flex items-center justify-center gap-2 rounded-xl bg-[#eb8a28] px-8 py-4 text-sm font-bold text-[#0b1f33] no-underline transition hover:bg-[#f5b15d]">
+       <span>Evaluar mi situación</span> <i data-lucide="arrow-right" width="18" height="18"></i>
+      </a>
+     </div>
+    </div>
+   </section>
+
+   <!-- SOBRE MÍ -->
+   <section id="sobre-mi" class="w-full bg-[#f8fafc] px-4 py-16 md:px-10 md:py-24 border-y border-slate-200">
+    <div class="mx-auto max-w-4xl grid gap-8 md:grid-cols-[auto_1fr] items-center">
+     <div class="mx-auto h-36 w-36 md:h-44 md:w-44 rounded-2xl overflow-hidden shadow-lg shrink-0 border-4 border-white ring-1 ring-slate-200">
+      <img src="assets/img/osvaldo-villazon.png" alt="Osvaldo Villazon, Contador Público" class="h-full w-full object-cover">
+     </div>
+     <div class="text-center md:text-left">
+      <span class="text-xs font-bold uppercase tracking-widest text-[#0b7a75]">Sobre mí</span>
+      <h2 class="display-font mt-2 text-2xl md:text-3xl font-bold text-[#0b1f33]">Osvaldo Villazon, Contador Público</h2>
+      <p class="mt-3 text-slate-600 text-sm md:text-base leading-relaxed">
+       Especialista en tributación y aplicación de NIIF, enfocado en soluciones analíticas y automatización de procesos financieros. Mejor puntaje Saber Pro de mi promoción y nominado al Premio Mérito Empresarial 2025 por la innovación aplicada al sector empresarial.
+      </p>
+     </div>
+    </div>
+   </section>
+
+   <!-- BLOG -->
+   <section id="blog" class="w-full bg-white px-4 py-16 md:px-10 md:py-20">
+    <div class="mx-auto max-w-6xl">
+     <div class="flex items-end justify-between flex-wrap gap-4">
+      <div>
+       <span class="text-xs font-bold uppercase tracking-widest text-[#0b7a75]">Actualidad Tributaria</span>
+       <h2 class="display-font mt-2 text-2xl md:text-4xl font-bold text-[#0b1f33]">Blog</h2>
+      </div>
+      <a href="/blog" class="text-sm font-bold text-[#0b7a75] no-underline hover:text-[#09635f] inline-flex items-center gap-1.5">Ver todos los artículos <i data-lucide="arrow-right" width="14" height="14"></i></a>
+     </div>
+     <div class="mt-8 grid gap-6 md:grid-cols-3">
+      <!-- Artículo placeholder: cuando conectes el CMS, estas tarjetas se generan automáticamente -->
+      <article class="card-hover rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+       <div class="h-40 bg-gradient-to-br from-[#0b7a75] to-[#0b1f33]"></div>
+       <div class="p-5">
+        <span class="text-xs font-semibold text-[#0b7a75]">Declaración de Renta</span>
+        <h3 class="display-font mt-1 font-bold text-[#0b1f33]">Título del artículo próximamente</h3>
+        <p class="mt-2 text-xs text-slate-500">Aquí se mostrarán tus publicaciones automáticamente.</p>
+       </div>
+      </article>
+      <article class="card-hover rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+       <div class="h-40 bg-gradient-to-br from-[#eb8a28] to-[#0b1f33]"></div>
+       <div class="p-5">
+        <span class="text-xs font-semibold text-[#0b7a75]">Planeación</span>
+        <h3 class="display-font mt-1 font-bold text-[#0b1f33]">Título del artículo próximamente</h3>
+        <p class="mt-2 text-xs text-slate-500">Aquí se mostrarán tus publicaciones automáticamente.</p>
+       </div>
+      </article>
+      <article class="card-hover rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+       <div class="h-40 bg-gradient-to-br from-[#123c69] to-[#0b1f33]"></div>
+       <div class="p-5">
+        <span class="text-xs font-semibold text-[#0b7a75]">Seguridad Social</span>
+        <h3 class="display-font mt-1 font-bold text-[#0b1f33]">Título del artículo próximamente</h3>
+        <p class="mt-2 text-xs text-slate-500">Aquí se mostrarán tus publicaciones automáticamente.</p>
+       </div>
+      </article>
+     </div>
+    </div>
+   </section>
+
+   <!-- CONTACTO -->
+   <section id="contacto" class="grid-lines w-full bg-[#edf4f4] px-4 py-16 md:px-10 md:py-20 border-t border-slate-200">
+    <div class="mx-auto max-w-3xl text-center">
+     <span class="text-xs font-bold uppercase tracking-widest text-[#0b7a75]">Contacto</span>
+     <h2 class="display-font mt-2 text-2xl md:text-4xl font-bold text-[#0b1f33]">Hablemos de tus impuestos</h2>
+     <p class="mt-2 text-slate-600 text-sm md:text-base">Escríbeme por WhatsApp o déjame tu mensaje aquí abajo.</p>
+
+     <div class="mt-8">
+      <a href="https://wa.me/573019028063" target="_blank" rel="noopener" class="btn-shine inline-flex items-center justify-center gap-3 rounded-xl bg-[#25D366] px-8 py-4 text-base font-bold text-white no-underline shadow-md transition hover:bg-[#1ebe5b]">
+       <i data-lucide="message-circle" width="20" height="20"></i> <span>Escribir por WhatsApp</span>
+      </a>
+     </div>
+
+     <div class="my-8 flex items-center gap-4 max-w-md mx-auto">
+      <span class="h-px flex-1 bg-slate-300"></span> <span class="text-xs font-bold uppercase tracking-wider text-slate-400">o envíame un mensaje</span> <span class="h-px flex-1 bg-slate-300"></span>
+     </div>
+
+     <form id="contact-form" class="mx-auto max-w-md grid gap-4 text-left">
+      <div>
+       <label for="c-name" class="block text-xs font-semibold text-slate-700 mb-1">Nombre</label>
+       <input id="c-name" required type="text" autocomplete="name" placeholder="Tu nombre" class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 focus:border-[#0b7a75] focus:outline-none focus:ring-1 focus:ring-[#0b7a75]">
+      </div>
+      <div>
+       <label for="c-contact" class="block text-xs font-semibold text-slate-700 mb-1">Correo o WhatsApp</label>
+       <input id="c-contact" required type="text" placeholder="correo@ejemplo.com o 300 000 0000" class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 focus:border-[#0b7a75] focus:outline-none focus:ring-1 focus:ring-[#0b7a75]">
+      </div>
+      <div>
+       <label for="c-message" class="block text-xs font-semibold text-slate-700 mb-1">Mensaje</label>
+       <textarea id="c-message" required rows="4" placeholder="Cuéntame brevemente tu caso" class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 focus:border-[#0b7a75] focus:outline-none focus:ring-1 focus:ring-[#0b7a75]"></textarea>
+      </div>
+      <button id="contact-submit" type="submit" class="btn-shine flex items-center justify-center gap-2 rounded-xl bg-[#0b1f33] px-6 py-4 text-sm font-bold text-white transition hover:bg-[#123c69] shadow-md">
+       <i data-lucide="send" width="18" height="18"></i> <span>Enviar Mensaje</span>
+      </button>
+      <p id="contact-form-message" class="hidden text-center text-sm font-semibold" role="status"></p>
+     </form>
+    </div>
+   </section>
+  </main>
+
+  <footer class="w-full bg-[#0b1f33] px-4 py-10 border-t border-slate-800 text-center text-xs text-slate-400">
+   <p class="display-font text-white font-bold text-sm mb-2">Impuesta<span class="text-[#eb8a28]">mente</span></p>
+   <p>© 2026 Impuestamente. Contenido informativo, no constituye asesoría formal sin un contrato de servicios.</p>
+  </footer>
+
+  <div id="mobile-cta-bar" class="mobile-cta-bar">
+   <a href="/calculadora-renta" class="flex items-center justify-center gap-2 rounded-xl bg-[#eb8a28] px-4 py-3 text-sm font-bold text-[#0b1f33] no-underline shadow-lg">
+    <i data-lucide="calculator" width="18" height="18"></i>
+    <span>Evaluar mi situación gratis</span>
+   </a>
+  </div>
+
+  <script>
+    // Formspree envía el mensaje a ovillazon@impuestamente.com sin exponer el correo en el HTML.
+    // Reemplaza este endpoint por el tuyo: crea un formulario gratis en https://formspree.io
+    // apuntando a ovillazon@impuestamente.com y pega aquí el ID (ej: "mzbxxxxx").
+    const CONTACT_FORM_ENDPOINT = "https://formspree.io/f/REEMPLAZAR_ID";
+
+    document.getElementById("contact-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const button = document.getElementById("contact-submit");
+      const msgEl = document.getElementById("contact-form-message");
+      const name = document.getElementById("c-name").value.trim();
+      const contact = document.getElementById("c-contact").value.trim();
+      const message = document.getElementById("c-message").value.trim();
+
+      button.disabled = true;
+      button.classList.add("opacity-60", "cursor-not-allowed");
+
+      try {
+        const response = await fetch(CONTACT_FORM_ENDPOINT, {
+          method: "POST",
+          headers: { "Accept": "application/json", "Content-Type": "application/json" },
+          body: JSON.stringify({ nombre: name, contacto: contact, mensaje: message, origen: "Formulario Home - Impuestamente" })
+        });
+
+        button.disabled = false;
+        button.classList.remove("opacity-60", "cursor-not-allowed");
+        msgEl.classList.remove("hidden");
+
+        if (response.ok) {
+          msgEl.textContent = "¡Mensaje enviado! Te responderé pronto.";
+          msgEl.className = "text-center text-sm font-semibold text-emerald-600";
+          e.target.reset();
+        } else {
+          msgEl.textContent = "No se pudo enviar. Intenta por WhatsApp mientras tanto.";
+          msgEl.className = "text-center text-sm font-semibold text-red-600";
+        }
+      } catch (err) {
+        button.disabled = false;
+        button.classList.remove("opacity-60", "cursor-not-allowed");
+        msgEl.classList.remove("hidden");
+        msgEl.textContent = "No se pudo enviar. Intenta por WhatsApp mientras tanto.";
+        msgEl.className = "text-center text-sm font-semibold text-red-600";
+      }
+    });
+
+    document.addEventListener("DOMContentLoaded", () => {
+      if (window.lucide) lucide.createIcons();
+
+      const revealEls = document.querySelectorAll(".reveal-up");
+      if ("IntersectionObserver" in window && revealEls.length) {
+        const obs = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) { entry.target.classList.add("in-view"); obs.unobserve(entry.target); }
+          });
+        }, { threshold: 0.15 });
+        revealEls.forEach((el) => obs.observe(el));
+      }
+
+      const mobileCta = document.getElementById("mobile-cta-bar");
+      const hero = document.querySelector(".hero-pattern");
+      const contacto = document.getElementById("contacto");
+      if (mobileCta && hero && contacto && "IntersectionObserver" in window) {
+        let heroVisible = true, contactoVisible = false;
+        const update = () => mobileCta.classList.toggle("show", !heroVisible && !contactoVisible);
+        new IntersectionObserver((e) => { e.forEach(x => heroVisible = x.isIntersecting); update(); }, { threshold: 0.05 }).observe(hero);
+        new IntersectionObserver((e) => { e.forEach(x => contactoVisible = x.isIntersecting); update(); }, { threshold: 0.05 }).observe(contacto);
+      }
+    });
+  </script>
+ </body>
+</html>

@@ -1,0 +1,6 @@
+{
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/calculadora-renta", "destination": "/calculadoras/diagnostico-renta.html" }
+  ]
+}
