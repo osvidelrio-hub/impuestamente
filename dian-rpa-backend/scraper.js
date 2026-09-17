@@ -135,22 +135,23 @@ async function fetchExogena({ cedula, clave, otp }) {
     // --- PASO 3: Navegar a "Información Exógena" ------------------------
     // AJUSTAR: la ruta real puede ser un link de texto, un ítem de menú,
     // o requerir 2-3 clics (Servicios > Consultas > Exógena, por ejemplo).
-        await page.click('input[name="vistaDashboard:frmDashboard:btnExogena"]');
-    await page.waitForLoadState("networkidle", { timeout: 30000 });
+            await page.click('input[name="vistaDashboard:frmDashboard:btnExogena"]');
 
-    // Modal de confirmación antes del selector de año.
-    const aceptarVisible = await page
-      .locator('text=Aceptar')
-      .isVisible()
-      .catch(() => false);
-    if (aceptarVisible) {
+    // Este portal usa AJAX viejo (RichFaces), no navegación completa:
+    // esperamos el elemento específico en vez de "networkidle".
+    try {
+      await page.waitForSelector('text=Aceptar', { state: "visible", timeout: 10000 });
       await page.click('text=Aceptar');
-      await page.waitForLoadState("networkidle", { timeout: 15000 });
+    } catch {
+      // No apareció el modal esta vez; seguimos sin problema.
     }
 
-    // Forzamos año 2025 (ya viene seleccionado por defecto, pero no dependemos de eso).
+    await page.waitForSelector('select[name="vistaDashboard:frmDashboard:anioSel"]', {
+      state: "visible",
+      timeout: 20000,
+    });
     await page.selectOption('select[name="vistaDashboard:frmDashboard:anioSel"]', "2025");
-    await page.waitForLoadState("networkidle", { timeout: 15000 });
+    await page.waitForTimeout(500);
 
     // --- PASO 4: Generar y descargar el reporte --------------------------
     const [download] = await Promise.all([
