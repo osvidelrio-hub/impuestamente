@@ -99,21 +99,29 @@ async function fetchExogena({ cedula, clave, otp }) {
     // --- PASO 3: Navegar a "Información Exógena" ------------------------
     // AJUSTAR: la ruta real puede ser un link de texto, un ítem de menú,
     // o requerir 2-3 clics (Servicios > Consultas > Exógena, por ejemplo).
-    await page.click('input[name="vistaDashboard:frmDashboard:btnExogena"]');
+        await page.click('input[name="vistaDashboard:frmDashboard:btnExogena"]');
     await page.waitForLoadState("networkidle", { timeout: 30000 });
-    // Nota: aquí probablemente aparece un paso para elegir el AÑO (2025)
-    // antes de poder descargar. Pendiente ajustar con el siguiente selector.
 
-    // --- PASO 4: Descargar o leer el reporte -----------------------------
-    // Opción A (preferida): la DIAN genera un archivo descargable.
+    // Modal de confirmación antes del selector de año.
+    const aceptarVisible = await page
+      .locator('text=Aceptar')
+      .isVisible()
+      .catch(() => false);
+    if (aceptarVisible) {
+      await page.click('text=Aceptar');
+      await page.waitForLoadState("networkidle", { timeout: 15000 });
+    }
+
+    // Forzamos año 2025 (ya viene seleccionado por defecto, pero no dependemos de eso).
+    await page.selectOption('select[name="vistaDashboard:frmDashboard:anioSel"]', "2025");
+    await page.waitForLoadState("networkidle", { timeout: 15000 });
+
+    // --- PASO 4: Generar y descargar el reporte --------------------------
     const [download] = await Promise.all([
-      page.waitForEvent("download", { timeout: 30000 }),
-      page.click('text=Descargar'), // AJUSTAR
+      page.waitForEvent("download", { timeout: 45000 }),
+      page.click('input[name="vistaDashboard:frmDashboard:btnExogenaGenerar"]'),
     ]);
     const filePath = await download.path();
-
-    // Opción B (alternativa si no hay descarga, sino una tabla en pantalla):
-    // const rows = await page.$$eval('table#exogena tr', trs => ...);
 
     const parsed = await parseExogenaFile(filePath);
 
