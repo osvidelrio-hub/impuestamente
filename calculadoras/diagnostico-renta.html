@@ -758,7 +758,7 @@
         }, { threshold: 0.05 }).observe(calcSection);
       }
     });
-   <script>
+  <script>
     // Función para formatear cualquier número a Pesos Colombianos (COP)
     function formatearMoneda(valor) {
       if (isNaN(valor) || valor === '' || valor === null) return '$ 0';
@@ -784,6 +784,14 @@
         }
       });
     }
+
+    // ==============================================================
+    // CONEXIÓN BACKEND DIAN (AQUÍ VA EL BLOQUE 2 DE CLAUDE)
+    // ==============================================================
+    const DIAN_BACKEND_URL = "https://dian-rpa-backend-production.up.railway.app/api/dian-exogena";
+
+    // Pega aquí el resto del código JS que te dio Claude para la DIAN...
+
 
     // Inicialización del script
     document.addEventListener('DOMContentLoaded', () => {
