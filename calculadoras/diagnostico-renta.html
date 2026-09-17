@@ -758,6 +758,42 @@
         }, { threshold: 0.05 }).observe(calcSection);
       }
     });
+   <script>
+    // Función para formatear cualquier número a Pesos Colombianos (COP)
+    function formatearMoneda(valor) {
+      if (isNaN(valor) || valor === '' || valor === null) return '$ 0';
+      return new Intl.NumberFormat('es-CO', {
+        style: 'currency',
+        currency: 'COP',
+        maximumFractionDigits: 0
+      }).format(valor);
+    }
+
+    // Función para aplicar formato automático en vivo a un <input> cuando el usuario escribe
+    function aplicarFormatoInput(input) {
+      input.addEventListener('input', (e) => {
+        let valorLimpio = e.target.value.replace(/\D/g, ''); // Remueve letras y caracteres especiales
+        if (valorLimpio) {
+          e.target.value = new Intl.NumberFormat('es-CO', {
+            style: 'currency',
+            currency: 'COP',
+            maximumFractionDigits: 0
+          }).format(valorLimpio);
+        } else {
+          e.target.value = '';
+        }
+      });
+    }
+
+    // Inicialización del script
+    document.addEventListener('DOMContentLoaded', () => {
+      // Si tienes un input con id="ingresos", le aplica el formato automático al escribir:
+      const inputIngresos = document.getElementById('ingresos');
+      if (inputIngresos) {
+        aplicarFormatoInput(inputIngresos);
+      }
+    });
   </script>
+
  </body>
 </html>
