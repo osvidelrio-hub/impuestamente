@@ -144,19 +144,40 @@ async function fetchExogena({ cedula, clave, otp }) {
       // No apareció el modal esta vez; seguimos sin problema.
     }
 
-    // El año 2025 ya viene seleccionado por defecto en el portal, así que
-    // no forzamos el <select> (queda oculto dentro de un panel AJAX que
-    // Playwright no considera "visible" aunque funcionalmente esté listo).
-    await page.waitForSelector('input[name="vistaDashboard:frmDashboard:btnExogenaGenerar"]', {
+        // Seleccionamos el año directamente vía DOM (el <select> puede estar
+    // visualmente oculto dentro de un panel AJAX, pero sí es funcional).
+    await page.waitForSelector('select[name="vistaDashboard:frmDashboard:anioSel"]', {
       state: "attached",
       timeout: 20000,
     });
-    await page.waitForTimeout(1000); // deja que el panel AJAX termine de renderizar
+    await page.locator('select[name="vistaDashboard:frmDashboard:anioSel"]').evaluate((el) => {
+      el.value = "2025";
+      el.dispatchEvent(new Event("change", { bubbles: true }));
+    });
+
+    // Ese cambio dispara una llamada AJAX que regenera el botón "Generar"
+    // con los parámetros reales (año + timestamp). Esperamos esa respuesta.
+    await page
+      .waitForResponse((resp) => resp.url().includes("DefDashboard.faces"), { timeout: 15000 })
+      .catch(() => {});
+    await page.waitForTimeout(1500);
+
+    // Verificación: si el botón sigue sin el año, no seguimos a ciegas.
+    const onclickAttr = await page
+      .locator('input[name="vistaDashboard:frmDashboard:btnExogenaGenerar"]')
+      .getAttribute("onclick");
+    if (onclickAttr && onclickAttr.includes("reporteExogena('','')")) {
+      throw new DianScrapeError(
+        "El año no se aplicó a tiempo antes de generar el reporte. Reintenta la consulta."
+      );
+    }
 
     // --- PASO 4: Generar y descargar el reporte --------------------------
     const [download] = await Promise.all([
       page.waitForEvent("download", { timeout: 45000 }),
-      page.click('input[name="vistaDashboard:frmDashboard:btnExogenaGenerar"]', { force: true }),
+      page
+        .locator('input[name="vistaDashboard:frmDashboard:btnExogenaGenerar"]')
+        .evaluate((el) => el.click()),
     ]);
     const filePath = await download.path();
     const parsed = await parseExogenaFile(filePath);
