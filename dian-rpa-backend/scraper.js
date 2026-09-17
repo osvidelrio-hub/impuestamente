@@ -59,12 +59,21 @@ async function fetchExogena({ cedula, clave, otp }) {
     // Sugerencia: usa atributos estables (id, name) en vez de clases CSS
     // que la DIAN cambia seguido.
     // Selecciona "Cédula de ciudadanía" para habilitar el campo de documento
+        // Selecciona "Cédula de ciudadanía" para habilitar el campo de documento
     await page.click('mat-select');
     await page.click('mat-option:has-text("Cédula de ciudadanía")');
-    await page.waitForTimeout(500); // le da tiempo a Angular de habilitar el campo
+    await page.waitForTimeout(500);
 
-    await page.fill('input[name="numDocumento"]', cedula);
-    await page.fill('input[name="password"]', clave);
+    // Angular no valida bien un .fill() directo: simulamos tecleo real.
+    await page.click('input[name="numDocumento"]');
+    await page.locator('input[name="numDocumento"]').pressSequentially(cedula, { delay: 50 });
+
+    await page.click('input[name="password"]');
+    await page.locator('input[name="password"]').pressSequentially(clave, { delay: 50 });
+
+    // Saca el foco del último campo para que Angular termine de validar.
+    await page.keyboard.press("Tab");
+    await page.waitForTimeout(300);
     await maybeSolveCaptcha(page); // ver función abajo
 
     await page.click('button:has-text("Ingresar")');
