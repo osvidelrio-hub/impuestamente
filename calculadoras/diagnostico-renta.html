@@ -460,7 +460,81 @@
       currency: "COP", 
       maximumFractionDigits: 0 
     }).format(value);
+<script>
+  const DIAN_BACKEND_URL = "https://impuestamente-production.up.railway.app/api/dian-exogena";
 
+  const dianToggleBtn = document.getElementById("dian-toggle-btn");
+  const dianPanel = document.getElementById("dian-panel");
+  const dianToggleIcon = document.getElementById("dian-toggle-icon");
+
+  dianToggleBtn.addEventListener("click", () => {
+    const isHidden = dianPanel.classList.toggle("hidden");
+    dianToggleIcon.style.transform = isHidden ? "rotate(0deg)" : "rotate(180deg)";
+  });
+
+  function dianStatus(msg, type) {
+    const el = document.getElementById("dian-status");
+    el.textContent = msg;
+    el.className = `mt-3 text-xs font-semibold ${
+      type === "error" ? "text-red-600" : type === "success" ? "text-emerald-700" : "text-slate-600"
+    }`;
+    el.classList.remove("hidden");
+  }
+
+  document.getElementById("dian-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const cedula = document.getElementById("dian-cedula").value.trim();
+    const clave = document.getElementById("dian-clave").value;
+    const otp = document.getElementById("dian-otp").value.trim();
+    const btn = document.getElementById("dian-submit-btn");
+
+    if (!cedula || !clave) return dianStatus("Ingresa tu cédula y clave de la DIAN.", "error");
+
+    btn.disabled = true;
+    btn.classList.add("opacity-60", "cursor-not-allowed");
+    dianStatus("Conectando con la DIAN, esto puede tardar unos segundos...", "info");
+
+    try {
+      const res = await fetch(DIAN_BACKEND_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ cedula, clave, otp: otp || undefined }),
+      });
+      const result = await res.json();
+
+      if (result.requiresOtp) {
+        document.getElementById("dian-otp-wrap").classList.remove("hidden");
+        dianStatus("La DIAN pidió un código de verificación. Ingrésalo arriba y da clic en Conectar de nuevo.", "info");
+        return;
+      }
+
+      if (result.requiresManual) {
+        dianStatus("La DIAN pidió verificación adicional que no podemos resolver automáticamente. Sube tu Excel manualmente abajo.", "error");
+        return;
+      }
+
+      if (!result.ok) {
+        dianStatus(result.error || "No fue posible conectar con la DIAN. Intenta de nuevo o sube tu Excel manualmente.", "error");
+        return;
+      }
+
+      document.getElementById("income").value = money(result.data.income);
+      document.getElementById("assets").value = money(result.data.assets);
+      document.getElementById("card-spending").value = money(result.data.cardSpending);
+      document.getElementById("deposits").value = money(result.data.deposits);
+      document.getElementById("purchases").value = money(result.data.purchases);
+
+      dianStatus("¡Datos cargados exitosamente desde la DIAN!", "success");
+      document.getElementById("dian-clave").value = "";
+      document.getElementById("calculator-form").scrollIntoView({ behavior: "smooth", block: "start" });
+    } catch (err) {
+      dianStatus("No fue posible conectar. Verifica tu conexión e intenta de nuevo.", "error");
+    } finally {
+      btn.disabled = false;
+      btn.classList.remove("opacity-60", "cursor-not-allowed");
+    }
+  });
+</script>
     const getNumericValue = input => {
       const cleanStr = String(input.value || "").replace(/[^\d]/g, "");
       return Number(cleanStr) || 0;
