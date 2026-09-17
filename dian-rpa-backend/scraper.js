@@ -71,15 +71,34 @@ async function fetchExogena({ cedula, clave, otp }) {
     await page.click('input[name="password"]');
     await page.locator('input[name="password"]').pressSequentially(clave, { delay: 50 });
 
-    // Saca el foco del último campo para que Angular termine de validar.
+        // Saca el foco del último campo para que Angular termine de validar.
     await page.keyboard.press("Tab");
     await page.waitForTimeout(300);
+
     await maybeSolveCaptcha(page); // ver función abajo
 
-    await page.click('button:has-text("Ingresar")');
-    await page.waitForLoadState("networkidle", { timeout: 45000 });
+    // --- DIAGNÓSTICO: si el botón sigue deshabilitado, revisamos qué
+    // campo obligatorio falta ANTES de perder 30s reintentando a ciegas.
+    const ingresarBtn = page.locator('button:has-text("Ingresar")');
+    const isDisabled = await ingresarBtn.getAttribute("disabled");
+    if (isDisabled !== null) {
+      const requiredEls = await page.locator("[required]").all();
+      const diagnostico = [];
+      for (const el of requiredEls) {
+        const tag = await el.evaluate((n) => n.tagName);
+        const name = (await el.getAttribute("name")) || (await el.getAttribute("id")) || "(sin name)";
+        const value = await el.inputValue().catch(() => "(no aplica)");
+        diagnostico.push(`${tag} name="${name}" -> valor tiene ${value.length} caracteres`);
+      }
+      console.error("DIAGNÓSTICO botón Ingresar deshabilitado. Campos requeridos encontrados:");
+      console.error(diagnostico.join("\n"));
+      throw new DianAuthError(
+        "El botón de Ingresar sigue deshabilitado. Revisa los logs de Railway para ver el diagnóstico de campos."
+      );
+    }
 
-    // --- PASO 2: OTP / segundo factor (si aplica) -----------------------
+    await page.click('button:has-text("Ingresar")');
+    await page.waitForLoadState("networkidle", { timeout: 30000 });
 
     // --- PASO 2: OTP / segundo factor (si aplica) -----------------------
     const otpFieldVisible = await page
