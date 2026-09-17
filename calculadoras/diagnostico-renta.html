@@ -329,7 +329,16 @@
       </button>
     </form>
 
-    <p id="dian-status" class="mt-3 hidden text-xs font-semibold" role="status"></p>
+        <p id="dian-status" class="mt-3 hidden text-xs font-semibold" role="status"></p>
+
+    <div id="dian-price-result" class="hidden mt-4 rounded-2xl border-2 border-[#eb8a28] bg-[#fff7ed] p-5 text-center">
+      <p class="canva-text text-xs font-bold uppercase tracking-wider text-[#eb8a28]">Tu tarifa estimada</p>
+      <p id="dian-price-value" class="canva-text mt-1 text-3xl font-extrabold text-[#0b1f33]"></p>
+      <a id="dian-whatsapp-link" href="#" target="_blank" rel="noopener" class="canva-button mt-4 inline-flex items-center justify-center gap-2 rounded-xl bg-[#0b7a75] px-6 py-3 text-sm font-bold text-white transition hover:bg-[#09635f] shadow-md">
+        <i data-lucide="message-circle" width="16" height="16"></i>
+        <span>Continuar por WhatsApp</span>
+      </a>
+    </div>
   </div>
 
   <div class="my-4 flex items-center gap-3">
@@ -518,11 +527,20 @@
         return;
       }
 
-      document.getElementById("income").value = money(result.data.income);
+            document.getElementById("income").value = money(result.data.income);
       document.getElementById("assets").value = money(result.data.assets);
       document.getElementById("card-spending").value = money(result.data.cardSpending);
       document.getElementById("deposits").value = money(result.data.deposits);
       document.getElementById("purchases").value = money(result.data.purchases);
+
+      if (result.price) {
+        document.getElementById("dian-price-value").textContent = money(result.price);
+        const mensaje = encodeURIComponent(
+          `Hola, ya conecté mis datos de la DIAN y mi tarifa estimada es ${money(result.price)}. Quiero continuar con mi declaración de renta.`
+        );
+        document.getElementById("dian-whatsapp-link").href = `https://wa.me/573019028063?text=${mensaje}`;
+        document.getElementById("dian-price-result").classList.remove("hidden");
+      }
 
       dianStatus("¡Datos cargados exitosamente desde la DIAN!", "success");
       document.getElementById("dian-clave").value = "";
