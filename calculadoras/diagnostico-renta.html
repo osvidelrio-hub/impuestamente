@@ -460,7 +460,7 @@
       currency: "COP", 
       maximumFractionDigits: 0 
     }).format(value);
-<script>
+
   const DIAN_BACKEND_URL = "https://impuestamente-production.up.railway.app/api/dian-exogena";
 
   const dianToggleBtn = document.getElementById("dian-toggle-btn");
@@ -534,7 +534,7 @@
       btn.classList.remove("opacity-60", "cursor-not-allowed");
     }
   });
-</script>
+
     const getNumericValue = input => {
       const cleanStr = String(input.value || "").replace(/[^\d]/g, "");
       return Number(cleanStr) || 0;
