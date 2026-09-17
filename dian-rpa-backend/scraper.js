@@ -71,8 +71,12 @@ async function fetchExogena({ cedula, clave, otp }) {
     await page.click('input[name="password"]');
     await page.locator('input[name="password"]').pressSequentially(clave, { delay: 50 });
 
-        // Saca el foco del último campo para que Angular termine de validar.
+            // Saca el foco del último campo para que Angular termine de validar.
     await page.keyboard.press("Tab");
+    await page.waitForTimeout(300);
+
+    // Marca el checkbox de autorización de tratamiento de datos (obligatorio).
+    await page.click('mat-checkbox[name="aceptaTratamientoDatos"]');
     await page.waitForTimeout(300);
 
     await maybeSolveCaptcha(page); // ver función abajo
