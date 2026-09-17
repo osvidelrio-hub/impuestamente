@@ -58,8 +58,8 @@ async function fetchExogena({ cedula, clave, otp }) {
     // AJUSTAR: reemplazar estos selectores por los reales del formulario.
     // Sugerencia: usa atributos estables (id, name) en vez de clases CSS
     // que la DIAN cambia seguido.
-    await page.fill('input[name="nit"]', cedula); // AJUSTAR
-    await page.fill('input[name="password"]', clave); // AJUSTAR
+    await page.fill('input[name="numDocumento"]', cedula);
+    await page.fill('input[name="password"]', clave);
 
     await maybeSolveCaptcha(page); // ver función abajo
 
