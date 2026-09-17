@@ -231,6 +231,23 @@ async function parseExogenaFile(filePath) {
 
   workbook.SheetNames.forEach((sheetName) => {
     const sheet = workbook.Sheets[sheetName];
+
+    // La DIAN a veces declara un rango (!ref) más corto que los datos
+    // reales de la hoja, lo que corta la lectura antes de llegar a los
+    // 5 renglones de resumen. Lo recalculamos a partir de las celdas
+    // que realmente existen, en cada hoja del archivo.
+    let maxR = 0, maxC = 0, any = false;
+    Object.keys(sheet).forEach((addr) => {
+      if (addr[0] === "!") return;
+      const cell = XLSX.utils.decode_cell(addr);
+      any = true;
+      if (cell.r > maxR) maxR = cell.r;
+      if (cell.c > maxC) maxC = cell.c;
+    });
+    if (any) {
+      sheet["!ref"] = XLSX.utils.encode_range({ s: { r: 0, c: 0 }, e: { r: maxR, c: maxC } });
+    }
+
     const rows = XLSX.utils.sheet_to_json(sheet, { header: 1, raw: true });
     rows.forEach((row) => {
       if (!Array.isArray(row)) return;
