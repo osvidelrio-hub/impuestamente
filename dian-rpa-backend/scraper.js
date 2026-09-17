@@ -58,9 +58,13 @@ async function fetchExogena({ cedula, clave, otp }) {
     // AJUSTAR: reemplazar estos selectores por los reales del formulario.
     // Sugerencia: usa atributos estables (id, name) en vez de clases CSS
     // que la DIAN cambia seguido.
+    // Selecciona "Cédula de ciudadanía" para habilitar el campo de documento
+    await page.click('mat-select');
+    await page.click('mat-option:has-text("Cédula de ciudadanía")');
+    await page.waitForTimeout(500); // le da tiempo a Angular de habilitar el campo
+
     await page.fill('input[name="numDocumento"]', cedula);
     await page.fill('input[name="password"]', clave);
-
     await maybeSolveCaptcha(page); // ver función abajo
 
     await page.click('button:has-text("Ingresar")');
