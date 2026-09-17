@@ -23,7 +23,7 @@
 const { chromium } = require("playwright");
 
 const MUISCA_LOGIN_URL =
-  "https://muisca.dian.gov.co/WebArquitectura/DefLogin.faces"; // AJUSTAR si la URL real difiere
+  "https://muisca.dian.gov.co/WebIdentidadLogin/?ideRequest=eyJjbGllbnRJZCI6IldvMGFLQWxCN3ZSUF8xNmZyUEkxeDlacGhCRWEiLCJyZWRpcmVjdF91cmkiOiJodHRwOi8vbXVpc2NhLmRpYW4uZ292LmNvL0lkZW50aWRhZFJlc3RfTG9naW5GaWx0cm8vYXBpL3N0cy92MS9hdXRoL2NhbGxiYWNrP3JlZGlyZWN0X3VyaT1odHRwJTNBJTJGJTJGbXVpc2NhLmRpYW4uZ292LmNvJTJGV2ViQXJxdWl0ZWN0dXJhJTJGRGVmTG9naW4uZmFjZXMiLCJyZXNwb25zZVR5cGUiOiIiLCJzY29wZSI6IiIsInN0YXRlIjoiIiwibm9uY2UiOiIiLCJwYXJhbXMiOnsidGlwb1VzdWFyaW8iOiJtdWlzY2EifX0%3D";
 
 const DEBUG_SCREENSHOTS = process.env.DEBUG_SCREENSHOTS === "true";
 
@@ -63,8 +63,10 @@ async function fetchExogena({ cedula, clave, otp }) {
 
     await maybeSolveCaptcha(page); // ver función abajo
 
-    await page.click('button[type="submit"]'); // AJUSTAR
-    await page.waitForLoadState("networkidle", { timeout: 30000 });
+    await page.click('button:has-text("Ingresar")');
+    await page.waitForLoadState("networkidle", { timeout: 45000 });
+
+    // --- PASO 2: OTP / segundo factor (si aplica) -----------------------
 
     // --- PASO 2: OTP / segundo factor (si aplica) -----------------------
     const otpFieldVisible = await page
@@ -97,8 +99,10 @@ async function fetchExogena({ cedula, clave, otp }) {
     // --- PASO 3: Navegar a "Información Exógena" ------------------------
     // AJUSTAR: la ruta real puede ser un link de texto, un ítem de menú,
     // o requerir 2-3 clics (Servicios > Consultas > Exógena, por ejemplo).
-    await page.click('text=Información Exógena'); // AJUSTAR
+    await page.click('input[name="vistaDashboard:frmDashboard:btnExogena"]');
     await page.waitForLoadState("networkidle", { timeout: 30000 });
+    // Nota: aquí probablemente aparece un paso para elegir el AÑO (2025)
+    // antes de poder descargar. Pendiente ajustar con el siguiente selector.
 
     // --- PASO 4: Descargar o leer el reporte -----------------------------
     // Opción A (preferida): la DIAN genera un archivo descargable.
