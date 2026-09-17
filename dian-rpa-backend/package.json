@@ -7,12 +7,13 @@
     "start": "node server.js",
     "dev": "node --watch server.js"
   },
-  "dependencies": {
+   "dependencies": {
     "express": "^4.19.2",
-   "playwright": "1.63.0",
+    "playwright": "1.63.0",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
-    "express-rate-limit": "^7.4.0"
+    "express-rate-limit": "^7.4.0",
+    "xlsx": "^0.18.5"
   },
   "engines": {
     "node": ">=18"
