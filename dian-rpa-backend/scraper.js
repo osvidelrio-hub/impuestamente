@@ -132,10 +132,19 @@ async function fetchExogena({ cedula, clave, otp }) {
       throw new DianAuthError("Cédula o clave incorrectas.");
     }
 
-    // --- PASO 3: Navegar a "Información Exógena" ------------------------
-    // AJUSTAR: la ruta real puede ser un link de texto, un ítem de menú,
-    // o requerir 2-3 clics (Servicios > Consultas > Exógena, por ejemplo).
-                await page.click('input[name="vistaDashboard:frmDashboard:btnExogena"]');
+        // --- PASO 3: Navegar a "Información Exógena" ------------------------
+    try {
+      await page.waitForSelector('input[name="vistaDashboard:frmDashboard:btnExogena"]', {
+        state: "visible",
+        timeout: 45000, // más tiempo, el portal a veces tarda en esta pantalla
+      });
+    } catch (e) {
+      // Diagnóstico: dónde quedó realmente el navegador cuando falló.
+      console.error("No apareció el botón de Exógena. URL actual:", page.url());
+      console.error("Título de la página:", await page.title().catch(() => "(no disponible)"));
+      throw e;
+    }
+    await page.click('input[name="vistaDashboard:frmDashboard:btnExogena"]');
 
     try {
       await page.waitForSelector('text=Aceptar', { state: "visible", timeout: 10000 });
