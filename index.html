@@ -77,7 +77,7 @@
     <div class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-300">
      <a href="#servicios" class="no-underline hover:text-white transition">Servicios</a>
      <a href="#sobre-mi" class="no-underline hover:text-white transition">Sobre mí</a>
-     <a href="https://osvidelrio.substack.com" target="_blank" rel="noopener" class="no-underline hover:text-white transition">Blog</a>
+     <a href="/blog" class="no-underline hover:text-white transition">Blog</a>
      <a href="#contacto" class="no-underline hover:text-white transition">Contacto</a>
     </div>
     <a href="/calculadora-renta" class="rounded-full bg-[#0b7a75] px-4 py-2 text-xs md:text-sm font-bold text-white no-underline transition hover:bg-[#09635f] shadow-sm">Diagnóstico Gratis</a>
@@ -223,7 +223,7 @@
        <span class="text-xs font-bold uppercase tracking-widest text-[#0b7a75]">Actualidad Tributaria</span>
        <h2 class="display-font mt-2 text-2xl md:text-4xl font-bold text-[#0b1f33]">Blog</h2>
       </div>
-      <a href="https://osvidelrio.substack.com" target="_blank" rel="noopener" class="text-sm font-bold text-[#0b7a75] no-underline hover:text-[#09635f] inline-flex items-center gap-1.5">Ver todos los artículos <i data-lucide="arrow-right" width="14" height="14"></i></a>
+      <a href="/blog" class="text-sm font-bold text-[#0b7a75] no-underline hover:text-[#09635f] inline-flex items-center gap-1.5">Ver todos los artículos <i data-lucide="arrow-right" width="14" height="14"></i></a>
      </div>
      <div id="blog-grid" class="mt-8 grid gap-6 md:grid-cols-3">
       <!-- Se llena automáticamente con tus últimas publicaciones de Substack -->
@@ -365,35 +365,26 @@
       waBtn.href = `https://wa.me/573019028063?text=${encodeURIComponent(waMsg)}`;
     });
 
-    // Trae las 3 últimas publicaciones del Substack automáticamente vía su feed RSS público.
-    const SUBSTACK_RSS = "https://osvidelrio.substack.com/feed";
-    const RSS_PROXY = "https://api.rss2json.com/v1/api.json?rss_url=" + encodeURIComponent(SUBSTACK_RSS);
-
+    // Trae las 3 últimas publicaciones del blog (mismo dominio, generado desde Notion).
     async function loadBlogPosts() {
       const grid = document.getElementById("blog-grid");
       if (!grid) return;
       try {
-        const res = await fetch(RSS_PROXY);
-        const data = await res.json();
-        if (data.status !== "ok" || !data.items || data.items.length === 0) throw new Error("sin publicaciones");
+        const res = await fetch("/blog/posts.json", { cache: "no-store" });
+        const posts = await res.json();
+        if (!posts || posts.length === 0) throw new Error("sin publicaciones");
 
-        const posts = data.items.slice(0, 3);
-        grid.innerHTML = posts.map(post => {
-          const img = post.thumbnail || (post.enclosure && post.enclosure.link) || "";
-          const date = new Date(post.pubDate).toLocaleDateString("es-CO", { day: "numeric", month: "long", year: "numeric" });
-          const excerpt = (post.description || "").replace(/<[^>]*>/g, "").slice(0, 90) + "...";
-          return `
-            <a href="${post.link}" target="_blank" rel="noopener" class="card-hover rounded-2xl border border-slate-200 shadow-sm overflow-hidden no-underline text-inherit block">
-             <div class="h-40 bg-slate-100 ${img ? "" : "bg-gradient-to-br from-[#0b7a75] to-[#0b1f33]"}" style="${img ? `background-image:url('${img}');background-size:cover;background-position:center;` : ""}"></div>
+        grid.innerHTML = posts.slice(0, 3).map(post => `
+            <a href="${post.url}" class="card-hover rounded-2xl border border-slate-200 shadow-sm overflow-hidden no-underline text-inherit block">
+             <div class="h-40 bg-slate-100 ${post.imagen ? "" : "bg-gradient-to-br from-[#0b7a75] to-[#0b1f33]"}" style="${post.imagen ? `background-image:url('${post.imagen}');background-size:cover;background-position:center;` : ""}"></div>
              <div class="p-5">
-              <span class="text-xs font-semibold text-[#0b7a75]">${date}</span>
-              <h3 class="display-font mt-1 font-bold text-[#0b1f33] line-clamp-2">${post.title}</h3>
-              <p class="mt-2 text-xs text-slate-500">${excerpt}</p>
+              <span class="text-xs font-semibold text-[#0b7a75]">${post.fechaTexto || ""}</span>
+              <h3 class="display-font mt-1 font-bold text-[#0b1f33] line-clamp-2">${post.titulo}</h3>
+              <p class="mt-2 text-xs text-slate-500">${post.resumen || ""}</p>
              </div>
-            </a>`;
-        }).join("");
+            </a>`).join("");
       } catch (err) {
-        grid.innerHTML = `<p class="col-span-3 text-center text-sm text-slate-500">Aún no hay publicaciones. Visita el <a href="https://osvidelrio.substack.com" target="_blank" rel="noopener" class="text-[#0b7a75] font-semibold">blog completo</a>.</p>`;
+        grid.innerHTML = `<p class="col-span-3 text-center text-sm text-slate-500">Muy pronto vas a encontrar aquí guías y análisis tributarios.</p>`;
       }
     }
     loadBlogPosts();
