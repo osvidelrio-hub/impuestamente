@@ -135,10 +135,8 @@ async function fetchExogena({ cedula, clave, otp }) {
     // --- PASO 3: Navegar a "Información Exógena" ------------------------
     // AJUSTAR: la ruta real puede ser un link de texto, un ítem de menú,
     // o requerir 2-3 clics (Servicios > Consultas > Exógena, por ejemplo).
-            await page.click('input[name="vistaDashboard:frmDashboard:btnExogena"]');
+                await page.click('input[name="vistaDashboard:frmDashboard:btnExogena"]');
 
-    // Este portal usa AJAX viejo (RichFaces), no navegación completa:
-    // esperamos el elemento específico en vez de "networkidle".
     try {
       await page.waitForSelector('text=Aceptar', { state: "visible", timeout: 10000 });
       await page.click('text=Aceptar');
@@ -146,20 +144,21 @@ async function fetchExogena({ cedula, clave, otp }) {
       // No apareció el modal esta vez; seguimos sin problema.
     }
 
-    await page.waitForSelector('select[name="vistaDashboard:frmDashboard:anioSel"]', {
-      state: "visible",
+    // El año 2025 ya viene seleccionado por defecto en el portal, así que
+    // no forzamos el <select> (queda oculto dentro de un panel AJAX que
+    // Playwright no considera "visible" aunque funcionalmente esté listo).
+    await page.waitForSelector('input[name="vistaDashboard:frmDashboard:btnExogenaGenerar"]', {
+      state: "attached",
       timeout: 20000,
     });
-    await page.selectOption('select[name="vistaDashboard:frmDashboard:anioSel"]', "2025");
-    await page.waitForTimeout(500);
+    await page.waitForTimeout(1000); // deja que el panel AJAX termine de renderizar
 
     // --- PASO 4: Generar y descargar el reporte --------------------------
     const [download] = await Promise.all([
       page.waitForEvent("download", { timeout: 45000 }),
-      page.click('input[name="vistaDashboard:frmDashboard:btnExogenaGenerar"]'),
+      page.click('input[name="vistaDashboard:frmDashboard:btnExogenaGenerar"]', { force: true }),
     ]);
     const filePath = await download.path();
-
     const parsed = await parseExogenaFile(filePath);
 
     return { ok: true, data: parsed };
