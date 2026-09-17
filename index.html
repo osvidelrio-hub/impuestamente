@@ -143,7 +143,7 @@
        <p class="display-font mt-1 text-2xl md:text-3xl font-bold text-[#0b1f33]" id="plazo-fecha"></p>
        <p class="mt-1 text-sm text-slate-600" id="plazo-dias"></p>
        <a id="plazo-whatsapp" href="#" target="_blank" rel="noopener" class="btn-shine mt-4 inline-flex items-center justify-center gap-2 rounded-xl bg-[#25D366] px-6 py-3 text-sm font-bold text-white no-underline shadow-md transition hover:bg-[#1ebe5b]">
-        <i data-lucide="message-circle" width="18" height="18"></i> <span>Prepararme antes de esa fecha</span>
+        <i data-lucide="message-circle" width="18" height="18"></i> <span id="plazo-whatsapp-label">Prepararme antes de esa fecha</span>
        </a>
       </div>
      </div>
@@ -330,15 +330,27 @@
 
       const fechaTexto = fecha.toLocaleDateString("es-CO", { day: "numeric", month: "long", year: "numeric", timeZone: "America/Bogota" });
 
-      let urgenciaTexto, dias_texto, bg;
+      let urgenciaTexto, dias_texto, bg, waLabel, waMsg;
       if (diffDias < 0) {
-        urgenciaTexto = "⚠ Plazo vencido"; bg = "bg-red-50"; dias_texto = "Tu fecha límite ya pasó. Evita que la sanción siga creciendo.";
+        urgenciaTexto = "⚠ Plazo vencido"; bg = "bg-red-50";
+        dias_texto = "Tu fecha límite ya pasó. Evita que la sanción siga creciendo.";
+        waLabel = "Ayuda urgente, ya vencí";
+        waMsg = `Hola, mi plazo para declarar renta era el ${fechaTexto} y ya venció. Necesito ayuda urgente para presentarla y minimizar la sanción.`;
       } else if (diffDias === 0) {
-        urgenciaTexto = "🔴 ¡Es hoy!"; bg = "bg-red-50"; dias_texto = "Tu declaración vence hoy.";
+        urgenciaTexto = "🔴 ¡Es hoy!"; bg = "bg-red-50";
+        dias_texto = "Tu declaración vence hoy.";
+        waLabel = "Ayuda urgente, vence hoy";
+        waMsg = `Hola, mi plazo para declarar renta es HOY (${fechaTexto}). Necesito ayuda urgente.`;
       } else if (diffDias <= 15) {
-        urgenciaTexto = "🟠 Urgente"; bg = "bg-orange-50"; dias_texto = `Te ${diffDias === 1 ? "queda" : "quedan"} ${diffDias} ${diffDias === 1 ? "día" : "días"}.`;
+        urgenciaTexto = "🟠 Urgente"; bg = "bg-orange-50";
+        dias_texto = `Te ${diffDias === 1 ? "queda" : "quedan"} ${diffDias} ${diffDias === 1 ? "día" : "días"}.`;
+        waLabel = "Prepararme antes de esa fecha";
+        waMsg = `Hola, mi plazo para declarar renta es el ${fechaTexto} (me quedan ${diffDias} días). Quiero ayuda para prepararla a tiempo.`;
       } else {
-        urgenciaTexto = "🟢 Tienes tiempo"; bg = "bg-emerald-50"; dias_texto = `Te ${diffDias === 1 ? "queda" : "quedan"} ${diffDias} días. Ideal para empezar con calma.`;
+        urgenciaTexto = "🟢 Tienes tiempo"; bg = "bg-emerald-50";
+        dias_texto = `Te ${diffDias === 1 ? "queda" : "quedan"} ${diffDias} días. Ideal para empezar con calma.`;
+        waLabel = "Prepararme antes de esa fecha";
+        waMsg = `Hola, mi plazo para declarar renta es el ${fechaTexto}. Quiero ayuda para prepararla a tiempo.`;
       }
 
       resultado.classList.remove("hidden");
@@ -349,8 +361,8 @@
 
       const waBtn = document.getElementById("plazo-whatsapp");
       waBtn.classList.remove("hidden");
-      const msg = encodeURIComponent(`Hola, mi plazo para declarar renta es el ${fechaTexto}. Quiero ayuda para prepararla a tiempo.`);
-      waBtn.href = `https://wa.me/573019028063?text=${msg}`;
+      document.getElementById("plazo-whatsapp-label").textContent = waLabel;
+      waBtn.href = `https://wa.me/573019028063?text=${encodeURIComponent(waMsg)}`;
     });
 
     // Trae las 3 últimas publicaciones del Substack automáticamente vía su feed RSS público.
