@@ -11,6 +11,7 @@ const {
 const { calcularTarifa } = require("./pricing");
 
 const app = express();
+app.set("trust proxy", 1);
 app.use(express.json());
 
 // Restringe qué dominios pueden llamar este backend (tu web, nada más).
