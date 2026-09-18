@@ -8,47 +8,18 @@
   <link rel="icon" type="image/svg+xml" href="/assets/img/logo-mark.svg">
   <script src="https://cdn.jsdelivr.net/npm/tailwindcss-cdn@3.4.10/tailwindcss.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Lora:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --ink:#0b1f33; --blue:#123c69; --teal:#0b7a75; --orange:#eb8a28; --mist:#edf4f4; --line:#d7e2e5;
+      --ink:#0e1a2b; --blue:#123c69; --teal:#0b7a75; --orange:#c2571c; --mist:#efe9dd; --line:#d7e2e5;
       --teal-glow: rgba(11,122,117,.35); --orange-glow: rgba(235,138,40,.4);
     }
     * { box-sizing:border-box; }
     html { scroll-behavior:smooth; }
-    body { margin:0; font-family:"DM Sans",sans-serif; color:var(--ink); background-color:#f8fafc; }
-    .display-font { font-family:"Lora","DM Sans",serif; letter-spacing:-0.01em; }
+    body { margin:0; font-family:"IBM Plex Sans",sans-serif; color:var(--ink); background-color:#f7f4ee; }
+    .display-font { font-family:"Fraunces",serif; letter-spacing:-0.01em; }
 
-    .hero-pattern {
-      position: relative; overflow: hidden; background-color:#0b1f33;
-      background-image: radial-gradient(circle at 85% 20%, rgba(235,138,40,.25), transparent 35%), linear-gradient(135deg, rgba(11,122,117,.4), transparent 50%);
-    }
-    .hero-blob {
-      position: absolute; border-radius: 9999px; filter: blur(48px); opacity: .55; pointer-events: none;
-      animation: floatBlob 12s ease-in-out infinite; z-index: 0;
-      transform: translateZ(0); -webkit-transform: translateZ(0); will-change: transform;
-      -webkit-backface-visibility: hidden; backface-visibility: hidden;
-    }
-    .hero-blob.b1 { width: 340px; height: 340px; background: radial-gradient(circle, var(--teal-glow), transparent 70%); top: -100px; left: -80px; }
-    .hero-blob.b1 { opacity: .35; }
-    .hero-preview-card { position:absolute; top:20px; right:-70px; width:230px; flex-direction:column; gap:10px; padding:16px 16px 18px; border-radius:18px; z-index:2;
-      background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.18); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
-      box-shadow:0 20px 45px -15px rgba(0,0,0,.45); animation: floatBlob 7s ease-in-out infinite; }
-    .hero-preview-head { display:flex; align-items:center; gap:5px; }
-    .hero-preview-dot { width:7px; height:7px; border-radius:9999px; }
-    .hero-preview-row { display:flex; align-items:center; justify-content:space-between; font-size:11.5px; color:rgba(255,255,255,.75); }
-    .hero-preview-row b { color:#fff; font-family:"Lora",serif; font-size:13px; }
-    .hero-preview-bar { height:6px; border-radius:9999px; background:rgba(255,255,255,.15); overflow:hidden; }
-    .hero-preview-bar span { display:block; height:100%; border-radius:9999px; background:linear-gradient(90deg,#0b7a75,#eb8a28); }
-    .hero-preview-result { display:flex; align-items:center; gap:6px; margin-top:2px; font-size:12px; font-weight:700; color:#7be0b0; }
     @keyframes floatBlob { 0%,100% { transform: translate(0,0) translateZ(0) scale(1); } 50% { transform: translate(18px,-22px) translateZ(0) scale(1.08); } }
-    .hero-inner { position: relative; z-index: 1; }
-   .hero-inner h1 {
-  max-width: 760px;
-  margin-left: auto;
-  margin-right: auto;
-}
-    @supports not (filter: blur(1px)) { .hero-blob { display: none; } }
 
     .grid-lines { background-image:linear-gradient(rgba(18,60,105,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(18,60,105,.04) 1px,transparent 1px); background-size:24px 24px; }
 
@@ -68,7 +39,7 @@
     .chat-bubble::after { content:""; position:absolute; left:-7px; bottom:10px; width:0; height:0; border:8px solid transparent; border-right-color:#e9f5f0; border-left:0; }
     
     .faq-item { transition: background .2s ease; }
-    .faq-item:hover { background: #f8fafc; }
+    .faq-item:hover { background: #f7f4ee; }
     .faq-item .faq-toggle { padding-left:0; padding-right:0; }
     .faq-item .faq-panel { padding-left:0; padding-right:0; }
     
@@ -79,7 +50,7 @@
     .mobile-cta-bar {
       position: fixed; left: 0; right: 0; bottom: 0; z-index: 60;
       transform: translateY(110%); transition: transform .35s ease;
-      background: #0b1f33; border-top: 1px solid rgba(255,255,255,.08);
+      background: #0e1a2b; border-top: 1px solid rgba(255,255,255,.08);
       padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
     }
     @supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
@@ -87,6 +58,111 @@
     }
     .mobile-cta-bar.show { transform: translateY(0); }
     @media (min-width: 768px) { .mobile-cta-bar { display: none; } }
+  </style>
+
+  <style>
+    :root{
+      --paper:#f7f4ee; --paper-2:#efe9dd; --rule:#d8d0bd; --accent:#c2571c;
+      --ink-soft:#4a5261; --teal:#0b7a75;
+    }
+    .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);}
+    .mono{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;}
+
+    header{background:rgba(247,244,238,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--rule);position:sticky;top:0;z-index:50;}
+    .navrow{display:flex;align-items:center;justify-content:space-between;padding-block:16px;gap:16px;flex-wrap:wrap;}
+    .brand{display:flex;align-items:center;gap:10px;font-family:"Fraunces",serif;font-weight:600;font-size:19px;text-decoration:none;color:var(--ink);}
+    header nav{display:flex;gap:24px;font-size:14px;}
+    header nav a{text-decoration:none;color:var(--ink);border-bottom:1px solid transparent;padding-bottom:2px;font-weight:400;}
+    header nav a:hover{border-color:var(--accent);}
+    .cta-mini{font-family:"IBM Plex Mono",monospace;font-size:12.5px;text-decoration:none;border:1px solid var(--ink);padding:9px 16px;border-radius:2px;white-space:nowrap;color:var(--ink);}
+    .cta-mini:hover{background:var(--ink);color:var(--paper);}
+    .plazo-tab{font-family:"IBM Plex Mono",monospace !important;font-size:12px !important;color:var(--accent) !important;border-bottom:1px dashed var(--accent) !important;padding-bottom:2px;}
+
+    .hero{padding-block:60px 44px;}
+    .hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center;}
+    .hero h1{font-family:"Fraunces",serif;font-weight:600;font-size:clamp(2.3rem,4.4vw + .4rem,3.6rem);line-height:1.05;letter-spacing:-.01em;text-wrap:balance;color:var(--ink);}
+    .hero h1 span{color:var(--accent);}
+    .hero p.lede{color:var(--ink-soft);font-size:16px;max-width:42ch;margin-top:16px;line-height:1.6;font-family:"Fraunces",serif;}
+    .hero-ctas{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap;}
+    .btn{font-family:"IBM Plex Mono",monospace;font-size:13px;text-decoration:none;padding:13px 22px;border-radius:2px;display:inline-block;}
+    .btn-solid{background:var(--ink);color:var(--paper);}
+    .btn-solid:hover{background:var(--accent);}
+    .btn-outline{border:1px solid var(--ink);color:var(--ink);}
+    .btn-outline:hover{border-color:var(--accent);color:var(--accent);}
+
+    .stage{position:relative;height:420px;perspective:1400px;}
+    .doc3d{position:absolute;inset:0;margin:auto;width:220px;height:290px;transform-style:preserve-3d;transform:rotateY(-22deg) rotateX(8deg);transition:transform .3s ease-out;}
+    .doc-layer{position:absolute;inset:0;border-radius:3px;border:1px solid var(--rule);background:var(--paper-2);overflow:hidden;}
+    .doc-layer.back{transform:translateZ(-16px) translateX(10px) translateY(10px);opacity:.7;}
+    .doc-layer.front{background:#fffdf8;box-shadow:0 30px 55px -18px rgba(14,26,43,.35);}
+    .doc-layer.front svg{display:block;width:100%;height:100%;}
+    .panel{position:absolute;width:148px;background:#fffdf8;border:1px solid var(--rule);border-radius:2px;padding:12px 14px;box-shadow:0 10px 24px -12px rgba(14,26,43,.18);}
+    .panel .lbl{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);}
+    .panel .val{font-family:"IBM Plex Mono",monospace;font-size:15px;color:var(--accent);margin-top:4px;}
+    .p1{top:6%;left:0;} .p2{top:10%;right:0;} .p3{bottom:12%;left:2%;} .p4{bottom:6%;right:4%;}
+    .conn{position:absolute;inset:0;pointer-events:none;}
+
+    .head-row{display:flex;justify-content:space-between;align-items:baseline;gap:20px;margin-bottom:32px;flex-wrap:wrap;}
+    .head-row h2{font-family:"Fraunces",serif;font-weight:600;margin:0;color:var(--ink);font-size:clamp(1.65rem,2.5vw,2.3rem);text-wrap:balance;}
+
+    .diag-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--rule);}
+    .diag-cell{padding:24px 20px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);position:relative;transition:transform .2s ease, box-shadow .2s ease, background .2s ease;will-change:transform;}
+    .diag-cell:last-child{border-right:none;}
+    .diag-cell .mono{color:var(--teal);font-size:13px;display:block;margin-bottom:10px;}
+    .diag-cell h3{font-family:"Fraunces",serif;font-weight:600;margin:0 0 8px;color:var(--ink);font-size:1.1rem;}
+    .diag-cell p{font-size:13px;color:var(--ink-soft);line-height:1.55;margin:0;}
+
+    .plazo-box{background:var(--ink);color:var(--paper);border-radius:2px;padding:36px 32px;display:grid;grid-template-columns:1fr auto;gap:26px;align-items:center;}
+    .plazo-form{display:flex;gap:10px;}
+    .plazo-form input{font-family:"IBM Plex Mono",monospace;background:transparent;border:1px solid #4a5261;color:var(--paper);padding:12px 14px;border-radius:2px;width:190px;font-size:14px;}
+    .plazo-form input::placeholder{color:#8b93a1;}
+    .plazo-form button{font-family:"IBM Plex Mono",monospace;background:var(--accent);color:var(--ink);border:none;padding:12px 20px;border-radius:2px;font-size:13px;cursor:pointer;font-weight:600;}
+
+    .serv-grid{display:grid;grid-template-columns:1.1fr .9fr .9fr;gap:1px;background:var(--rule);border:1px solid var(--rule);}
+    .serv-card{background:var(--paper);padding:26px;position:relative;transition:transform .2s ease, box-shadow .2s ease, background .2s ease;will-change:transform;}
+    .serv-card h3{font-family:"Fraunces",serif;font-weight:600;margin:0 0 8px;color:var(--ink);font-size:1.2rem;padding-right:50px;}
+    .serv-card p{font-size:13px;color:var(--ink-soft);margin:0 0 16px;}
+    .serv-card a{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);}
+    .serv-stamp{position:absolute;top:20px;right:20px;width:42px;height:42px;border-radius:50%;border:1.5px dashed var(--accent);display:flex;align-items:center;justify-content:center;color:var(--accent);transform:rotate(-8deg);opacity:.82;}
+    .serv-stamp svg{width:19px;height:19px;}
+    .serv-perf{border-top:1px dashed var(--rule);margin:2px 0 16px;}
+
+    .diag-cell:hover,.metodo-cell:hover,.serv-card:hover{z-index:4;background:#fffdf8;box-shadow:0 22px 36px -16px rgba(14,26,43,.28);}
+
+    .metodo{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--rule);}
+    .metodo-cell{padding:28px 26px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);position:relative;transition:transform .2s ease, box-shadow .2s ease, background .2s ease;will-change:transform;}
+    .metodo-cell:nth-child(2n){border-right:none;}
+    .metodo-cell:nth-child(3),.metodo-cell:nth-child(4){border-bottom:none;}
+    .metodo-cell .mono{color:var(--teal);font-size:12.5px;}
+    .metodo-cell h3{font-family:"Fraunces",serif;font-weight:600;margin:10px 0 0;color:var(--ink);font-size:1.15rem;}
+    .metodo-cell p{font-size:13.5px;color:var(--ink-soft);margin-top:10px;line-height:1.6;max-width:48ch;}
+
+    .about{display:grid;grid-template-columns:.85fr 1.5fr;gap:44px;align-items:center;}
+    .about-photo{aspect-ratio:1;background:var(--paper-2);border:1px solid var(--rule);}
+    .about h2{font-family:"Fraunces",serif;font-weight:600;margin:0;color:var(--ink);font-size:clamp(1.55rem,2.4vw,2.1rem);margin-bottom:16px;}
+    .about p{font-size:14.5px;line-height:1.7;color:var(--ink-soft);margin:0 0 12px;}
+
+    .legal-nav a{color:#94a3b8;text-decoration:none;}
+    .legal-nav a:hover{color:#ffffff;}
+
+    @media (max-width:900px){
+      .hero-grid{grid-template-columns:1fr;}
+      .stage{height:300px;}
+      .diag-grid{grid-template-columns:1fr 1fr;}
+      .diag-cell:nth-child(2n){border-right:none;}
+      .serv-grid{grid-template-columns:1fr;}
+      .metodo{grid-template-columns:1fr;}
+      .metodo-cell{border-right:none !important;border-bottom:1px solid var(--rule) !important;}
+      .metodo-cell:last-child{border-bottom:none !important;}
+      .about{grid-template-columns:1fr;}
+      .plazo-box{grid-template-columns:1fr;}
+      .plazo-form{flex-wrap:wrap;}
+      .plazo-form input{width:100%;}
+    }
+    @media (prefers-reduced-motion: reduce){
+      .doc3d{transition:none;}
+      .diag-cell,.metodo-cell,.serv-card{transition:none;}
+    }
   </style>
   <script type="application/ld+json">
   {
@@ -104,190 +180,206 @@
  </head>
  <body class="w-full text-slate-900 antialiased">
 
-  <header class="w-full bg-[#0b1f33] px-4 py-4 border-b border-white/10 sticky top-0 z-50 backdrop-blur-md bg-opacity-95">
-   <nav class="mx-auto flex max-w-6xl items-center justify-between gap-4">
-    <a href="/" class="display-font flex items-center gap-2.5 text-white no-underline font-bold text-lg">
-     <svg class="h-10 w-10 rounded-xl shadow-md shrink-0" viewBox="0 0 96 96" role="img" aria-label="Impuestamente"><defs><clipPath id="hdrLogoClip"><circle cx="48" cy="48" r="42"/></clipPath></defs><g clip-path="url(#hdrLogoClip)"><rect width="96" height="96" fill="#123c69"/><polygon points="0,0 96,0 0,96" fill="#0b1f33"/></g><path d="M20 32 A30 30 0 0 1 74 30" stroke="#ffffff" stroke-width="3" opacity="0.14" fill="none" stroke-linecap="round"/><rect x="41" y="34" width="14" height="32" rx="7" fill="#eb8a28"/><circle cx="48" cy="20" r="7.5" fill="#eb8a28"/><circle cx="45.5" cy="17.5" r="2.2" fill="#ffffff" opacity="0.45"/></svg>
-     <span>Impuesta<span class="text-[#eb8a28]">mente</span></span>
+  <header>
+   <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 navrow" style="padding-inline:16px;">
+    <a href="/" class="brand">
+     <svg width="26" height="26" viewBox="0 0 96 96" role="img" aria-label="Impuestamente"><circle cx="48" cy="48" r="40" fill="#fffdf8" stroke="#123c69" stroke-width="5"/><rect x="41" y="34" width="14" height="32" rx="7" fill="#0e1a2b"/><circle cx="48" cy="20" r="7.5" fill="#eb8a28"/><circle cx="45.5" cy="17.5" r="2.2" fill="#ffffff" opacity="0.55"/></svg>
+     <span>Impuestamente</span>
     </a>
-    <div class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-300">
-     <a href="#servicios" class="no-underline hover:text-white transition">Servicios</a>
-     <a href="#sobre-mi" class="no-underline hover:text-white transition">Sobre mí</a>
-     <a href="/blog" class="no-underline hover:text-white transition">Blog</a>
-     <a href="#contacto" class="no-underline hover:text-white transition">Contacto</a>
-    </div>
-    <a href="/calculadora-renta" class="rounded-full bg-[#0b7a75] px-4 py-2 text-xs md:text-sm font-bold text-white no-underline transition hover:bg-[#09635f] shadow-sm">Diagnóstico Gratis</a>
-   </nav>
+    <nav class="hidden md:flex">
+     <a href="#diagnostico">Diagnóstico</a>
+     <a href="#servicios">Servicios</a>
+     <a href="#metodo">Método</a>
+     <a href="#sobre-mi">Sobre mí</a>
+     <a href="/blog">Blog</a>
+     <a href="#plazo" class="plazo-tab">¿No sabes tu plazo? Pruébalo aquí →</a>
+    </nav>
+    <a href="/calculadora-renta" class="cta-mini">Evaluar mi situación</a>
+   </div>
   </header>
 
   <main>
    <!-- HERO -->
-   <section class="hero-pattern w-full px-4 py-16 md:px-10 md:py-24 text-white">
-    <div class="hero-blob b1"></div>
-    <div class="hero-inner relative mx-auto max-w-4xl text-center">
-     <div class="hero-preview-card hidden lg:flex" aria-hidden="true">
-      <div class="hero-preview-head">
-       <span class="hero-preview-dot" style="background:#eb8a28"></span>
-       <span class="hero-preview-dot" style="background:#f5b15d"></span>
-       <span class="hero-preview-dot" style="background:#ffffff33"></span>
-       <span class="ml-2 text-[11px] font-semibold text-white/70">Diagnóstico Automático</span>
+   <section class="hero-pattern wrap hero">
+    <div class="hero-grid">
+     <div>
+      <span class="eyebrow">Optimización legal de tus impuestos</span>
+      <h1 style="margin-top:14px;">No se trata solo<br class="hidden md:inline">de declarar. <span>Se trata<br class="hidden md:inline">de entender.</span></h1>
+      <p class="lede">Contador especialista en impuestos para personas naturales. Descubre en segundos si estás obligado a declarar y recibe acompañamiento experto para hacerlo bien, sin sanciones ni sorpresas.</p>
+      <div class="hero-ctas">
+       <a href="/calculadora-renta" class="btn btn-solid">Evaluar mi situación</a>
+       <a href="#contacto" class="btn btn-outline">Hablar con un contador</a>
       </div>
-      <div class="hero-preview-row"><span>UVT 2025</span><b>1.400</b></div>
-      <div class="hero-preview-row"><span>Ingresos brutos</span><b>$62.400.000</b></div>
-      <div class="hero-preview-bar"><span style="width:78%"></span></div>
-      <div class="hero-preview-result"><i data-lucide="check-circle-2" width="16" height="16"></i> Obligado a declarar</div>
+      <div class="flex flex-wrap items-center gap-6 text-xs md:text-sm" style="color:var(--ink-soft);border-top:1px solid var(--rule);padding-top:20px;margin-top:32px;">
+       <span class="flex items-center gap-2"><i data-lucide="award" width="16" height="16" style="color:var(--accent)"></i> Contador Público titulado</span>
+       <span class="flex items-center gap-2"><i data-lucide="lock" width="16" height="16" style="color:var(--accent)"></i> Diagnóstico 100% privado</span>
+       <span class="flex items-center gap-2"><i data-lucide="message-circle" width="16" height="16" style="color:var(--accent)"></i> Respuesta por WhatsApp</span>
+      </div>
      </div>
-     <span class="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5 text-xs font-semibold tracking-wide text-[#f5b15d] backdrop-blur-md border border-white/10">
-      <i data-lucide="shield-check" width="16" height="16"></i>
-      <span>Asesoría tributaria para personas naturales en Colombia</span>
-     </span>
-     <h1 class="display-font mt-6 mx-auto max-w-3xl font-bold leading-[1.05] tracking-tight" style="font-size: clamp(2rem, 5vw + 1rem, 3.75rem);">
-      Tu declaración de renta, <br class="hidden md:inline">
-      <span class="text-[#eb8a28]">sin dolores de cabeza</span>
-     </h1>
-     <p class="mx-auto mt-5 max-w-2xl text-base text-slate-300 md:text-lg leading-relaxed">
-      Contador especialista en impuestos para personas naturales. Descubre en segundos si estás obligado a declarar y recibe acompañamiento experto para hacerlo bien, sin sanciones ni sorpresas.
-     </p>
-     <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-      <a href="/calculadora-renta" class="btn-pulse btn-shine flex w-full sm:w-auto items-center justify-center gap-3 rounded-xl bg-[#eb8a28] px-8 py-4 text-base font-bold text-[#0b1f33] no-underline transition hover:bg-[#f5b15d]">
-       <span>Hacer Diagnóstico Gratis</span>
-       <i data-lucide="arrow-right" width="20" height="20"></i>
-      </a>
-      <a href="#contacto" class="flex w-full sm:w-auto items-center justify-center gap-2 rounded-xl border border-white/20 px-8 py-4 text-base font-bold text-white no-underline transition hover:bg-white/10">
-       <span>Hablar con un contador</span>
-      </a>
-     </div>
-     <div class="mt-10 flex flex-wrap items-center justify-center gap-6 text-xs md:text-sm text-slate-300 border-t border-white/10 pt-6">
-      <span class="flex items-center gap-2"><i data-lucide="award" class="text-[#eb8a28]" width="16" height="16"></i> Contador Público titulado</span>
-      <span class="flex items-center gap-2"><i data-lucide="lock" class="text-[#eb8a28]" width="16" height="16"></i> Diagnóstico 100% privado</span>
-      <span class="flex items-center gap-2"><i data-lucide="message-circle" class="text-[#eb8a28]" width="16" height="16"></i> Respuesta por WhatsApp</span>
+     <div class="stage" id="stage">
+      <svg class="conn" viewBox="0 0 400 420" preserveAspectRatio="none">
+       <line x1="80" y1="60" x2="170" y2="150" stroke="#d8d0bd" stroke-width="1.5"/>
+       <line x1="330" y1="80" x2="240" y2="150" stroke="#d8d0bd" stroke-width="1.5"/>
+       <line x1="60" y1="330" x2="170" y2="260" stroke="#d8d0bd" stroke-width="1.5"/>
+       <line x1="340" y1="340" x2="250" y2="270" stroke="#d8d0bd" stroke-width="1.5"/>
+      </svg>
+      <div class="doc3d" id="doc3d">
+       <div class="doc-layer back"></div>
+       <div class="doc-layer front">
+        <svg viewBox="0 0 220 290" xmlns="http://www.w3.org/2000/svg">
+            <rect x="0" y="0" width="220" height="290" fill="#fffdf8"/>
+            <text x="12" y="17" font-family="IBM Plex Mono, monospace" font-weight="700" font-size="11" fill="#123c69">DIAN</text>
+            <rect x="12" y="22" width="30" height="2" fill="#c2571c"/>
+            <rect x="166" y="8" width="42" height="20" rx="2" fill="#123c69"/>
+            <text x="187" y="22" font-family="IBM Plex Mono, monospace" font-weight="700" font-size="12" fill="#ffffff" text-anchor="middle">210</text>
+            <text x="12" y="36" font-family="IBM Plex Sans, sans-serif" font-weight="600" font-size="7" fill="#0e1a2b">Declaración de renta</text>
+            <text x="12" y="44" font-family="IBM Plex Sans, sans-serif" font-size="6" fill="#4a5261">Personas naturales · Año gravable 2025</text>
+            <line x1="8" y1="50" x2="212" y2="50" stroke="#123c69" stroke-width="1.5"/>
+            <g font-family="IBM Plex Mono, monospace">
+              <rect x="8" y="56" width="204" height="14" fill="#ffffff" stroke="#d8d0bd" stroke-width="0.75"/>
+              <text x="12" y="65.5" font-size="5.5" fill="#4a5261">Patrimonio bruto</text>
+              <rect x="195" y="58.5" width="13" height="9" fill="#ffffff" stroke="#d8d0bd" stroke-width="0.6"/><text x="201.5" y="65" font-size="5" fill="#123c69" text-anchor="middle">29</text>
+              <rect x="8" y="72" width="204" height="14" fill="#c3d6e6" opacity="0.55" stroke="#d8d0bd" stroke-width="0.75"/>
+              <text x="12" y="81.5" font-size="5.5" fill="#4a5261">Ingresos brutos</text>
+              <rect x="195" y="74.5" width="13" height="9" fill="#ffffff" stroke="#d8d0bd" stroke-width="0.6"/><text x="201.5" y="81" font-size="5" fill="#123c69" text-anchor="middle">32</text>
+              <rect x="8" y="88" width="204" height="14" fill="#ffffff" stroke="#d8d0bd" stroke-width="0.75"/>
+              <text x="12" y="97.5" font-size="5.5" fill="#4a5261">Costos y deducciones</text>
+              <rect x="195" y="90.5" width="13" height="9" fill="#ffffff" stroke="#d8d0bd" stroke-width="0.6"/><text x="201.5" y="97" font-size="5" fill="#123c69" text-anchor="middle">45</text>
+              <rect x="8" y="104" width="204" height="14" fill="#c3d6e6" opacity="0.55" stroke="#d8d0bd" stroke-width="0.75"/>
+              <text x="12" y="113.5" font-size="5.5" fill="#4a5261">Renta líquida</text>
+              <rect x="195" y="106.5" width="13" height="9" fill="#ffffff" stroke="#d8d0bd" stroke-width="0.6"/><text x="201.5" y="113" font-size="5" fill="#123c69" text-anchor="middle">54</text>
+              <rect x="8" y="120" width="204" height="14" fill="#ffffff" stroke="#d8d0bd" stroke-width="0.75"/>
+              <text x="12" y="129.5" font-size="5.5" fill="#4a5261">Rentas exentas</text>
+              <rect x="195" y="122.5" width="13" height="9" fill="#ffffff" stroke="#d8d0bd" stroke-width="0.6"/><text x="201.5" y="129" font-size="5" fill="#123c69" text-anchor="middle">37</text>
+              <rect x="8" y="136" width="204" height="14" fill="#ffffff" stroke="#d8d0bd" stroke-width="0.75"/>
+              <text x="12" y="145.5" font-size="5.5" fill="#4a5261">Deducciones imputables</text>
+              <rect x="195" y="138.5" width="13" height="9" fill="#ffffff" stroke="#d8d0bd" stroke-width="0.6"/><text x="201.5" y="145" font-size="5" fill="#123c69" text-anchor="middle">40</text>
+              <rect x="8" y="152" width="204" height="14" fill="#c3d6e6" opacity="0.55" stroke="#d8d0bd" stroke-width="0.75"/>
+              <text x="12" y="161.5" font-size="5.5" fill="#4a5261">Renta líquida ordinaria</text>
+              <rect x="195" y="154.5" width="13" height="9" fill="#ffffff" stroke="#d8d0bd" stroke-width="0.6"/><text x="201.5" y="161" font-size="5" fill="#123c69" text-anchor="middle">42</text>
+              <rect x="8" y="168" width="204" height="14" fill="#ffffff" stroke="#d8d0bd" stroke-width="0.75"/>
+              <text x="12" y="177.5" font-size="5.5" fill="#4a5261">Impuesto neto de renta</text>
+              <rect x="195" y="170.5" width="13" height="9" fill="#ffffff" stroke="#d8d0bd" stroke-width="0.6"/><text x="201.5" y="177" font-size="5" fill="#123c69" text-anchor="middle">127</text>
+              <rect x="8" y="184" width="204" height="14" fill="#ffffff" stroke="#d8d0bd" stroke-width="0.75"/>
+              <text x="12" y="193.5" font-size="5.5" fill="#4a5261">Retenciones año gravable</text>
+              <rect x="195" y="186.5" width="13" height="9" fill="#ffffff" stroke="#d8d0bd" stroke-width="0.6"/><text x="201.5" y="193" font-size="5" fill="#123c69" text-anchor="middle">132</text>
+              <rect x="8" y="200" width="204" height="14" fill="#c3d6e6" opacity="0.55" stroke="#d8d0bd" stroke-width="0.75"/>
+              <text x="12" y="209.5" font-size="5.5" fill="#4a5261">Total impuesto a cargo</text>
+              <rect x="195" y="202.5" width="13" height="9" fill="#ffffff" stroke="#d8d0bd" stroke-width="0.6"/><text x="201.5" y="209" font-size="5" fill="#123c69" text-anchor="middle">130</text>
+              <rect x="8" y="220" width="97" height="24" fill="#0e1a2b" stroke="#0e1a2b"/>
+              <text x="14" y="230" font-size="5.5" fill="#e9c6ad">Saldo a pagar</text>
+              <text x="14" y="240" font-size="8" font-weight="700" fill="#ffffff">135</text>
+              <rect x="115" y="220" width="97" height="24" fill="#c2571c"/>
+              <text x="121" y="230" font-size="5.5" fill="#fdeadb">Total saldo a favor</text>
+              <text x="121" y="240" font-size="8" font-weight="700" fill="#ffffff">138</text>
+            </g>
+            <line x1="8" y1="254" x2="212" y2="254" stroke="#d8d0bd" stroke-width="0.75"/>
+            <text x="12" y="266" font-family="IBM Plex Mono, monospace" font-size="5.5" fill="#8a8f9a">Formulario 210 · DIAN</text>
+            <rect x="150" y="260" width="62" height="9" fill="none" stroke="#d8d0bd" stroke-width="0.75"/>
+            <text x="153" y="266.5" font-family="IBM Plex Mono, monospace" font-size="5" fill="#8a8f9a">Firma contador</text>
+        </svg>
+       </div>
+      </div>
+      <div class="panel p1"><div class="lbl">Ingresos</div><div class="val">$62.4M</div></div>
+      <div class="panel p2"><div class="lbl">Patrimonio</div><div class="val">$118M</div></div>
+      <div class="panel p3"><div class="lbl">Deducciones</div><div class="val">$8.1M</div></div>
+      <div class="panel p4"><div class="lbl">Impuesto</div><div class="val">$0</div></div>
      </div>
     </div>
    </section>
 
+   <!-- DIAGNÓSTICO -->
+   <section id="diagnostico" class="wrap" style="padding-block:52px;">
+    <div class="head-row">
+     <div>
+      <h2>Diagnóstico Tributario Prevención &amp; Control</h2>
+      <p style="font-family:'Fraunces',serif;color:var(--ink-soft);font-size:15px;margin-top:10px;max-width:52ch;">Antes de reportar una cifra, determinamos tu realidad económica.</p>
+     </div>
+     <span class="eyebrow">01 — Diagnóstico</span>
+    </div>
+    <div class="diag-grid">
+     <div class="diag-cell"><span class="mono">01</span><h3>Clasificación de Ingresos</h3><p>Estructuración y clasificación por cédulas para aplicar la tarifa justa según la naturaleza de cada ingreso.</p></div>
+     <div class="diag-cell"><span class="mono">02</span><h3>Valoración Patrimonial</h3><p>Evaluación técnica de tus activos, deudas y costo fiscal para prevenir inconsistencias por comparación patrimonial.</p></div>
+     <div class="diag-cell"><span class="mono">03</span><h3>Optimización de Deducciones y Rentas exentas</h3><p>Revisión exhaustiva de soportes para aplicar todas las deducciones y rentas exentas a las que tienes derecho por ley.</p></div>
+     <div class="diag-cell"><span class="mono">04</span><h3>Determinación de la Obligación y Topes</h3><p>Auditamos tu exógena y la contrastamos con la realidad documentada para definir tu obligación exacta.</p></div>
+    </div>
+   </section>
+
    <!-- PLAZO DIAN -->
-   <section id="plazo" class="w-full bg-white px-4 py-12 md:px-10 md:py-16 border-b border-slate-200">
-    <div class="mx-auto max-w-2xl">
-     <div class="reveal-up rounded-3xl border-2 border-[#0b7a75]/20 bg-gradient-to-br from-[#edf4f4] to-white p-6 md:p-8 shadow-sm">
-      <div class="flex items-center gap-3">
-       <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#0b1f33] text-white"><i data-lucide="calendar" width="22" height="22"></i></span>
-       <div>
-        <h2 class="display-font font-bold text-lg md:text-xl text-[#0b1f33]">¿Cuál es tu plazo para declarar?</h2>
-        <p class="text-xs md:text-sm text-slate-500">Calendario oficial DIAN 2026 · Año gravable 2025</p>
-       </div>
-      </div>
-
-      <form id="plazo-form" class="mt-5 flex flex-col sm:flex-row gap-3">
-       <input id="plazo-input" type="text" inputmode="numeric" maxlength="2" placeholder="Dos últimos dígitos de tu cédula" required
-        class="flex-1 rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 focus:border-[#0b7a75] focus:outline-none focus:ring-1 focus:ring-[#0b7a75]">
-       <button type="submit" class="btn-shine rounded-xl bg-[#eb8a28] px-6 py-3 text-sm font-bold text-[#0b1f33] transition hover:bg-[#f5b15d]">Consultar</button>
+   <section class="wrap" id="plazo" style="padding-block:52px;">
+    <div class="plazo-box">
+     <div>
+      <h2 style="color:var(--paper);font-family:'Fraunces',serif;font-weight:600;font-size:1.3rem;">¿Cuál es tu plazo para declarar?</h2>
+      <p style="color:#c9cfd9;font-size:13.5px;margin-top:8px;max-width:42ch;">Calendario oficial DIAN 2026 · Año gravable 2025. Ingresa los dos últimos dígitos de tu cédula.</p>
+     </div>
+     <div>
+      <form id="plazo-form" class="plazo-form">
+       <input id="plazo-input" type="text" inputmode="numeric" maxlength="2" placeholder="Ej: 57" required>
+       <button type="submit">Consultar</button>
       </form>
-      <p class="mt-2 text-xs text-slate-400">Sin el dígito de verificación. Ej: si tu cédula es 1.037.581.657, escribe 57.</p>
-
-      <div id="plazo-resultado" class="hidden mt-5 rounded-2xl p-5 text-center">
-       <p class="text-xs font-bold uppercase tracking-widest" id="plazo-urgencia"></p>
-       <p class="display-font mt-1 text-2xl md:text-3xl font-bold text-[#0b1f33]" id="plazo-fecha"></p>
-       <p class="mt-1 text-sm text-slate-600" id="plazo-dias"></p>
-       <a id="plazo-whatsapp" href="#" target="_blank" rel="noopener" class="btn-shine mt-4 inline-flex items-center justify-center gap-2 rounded-xl bg-[#25D366] px-6 py-3 text-sm font-bold text-white no-underline shadow-md transition hover:bg-[#1ebe5b]">
-        <i data-lucide="message-circle" width="18" height="18"></i> <span id="plazo-whatsapp-label">Prepararme antes de esa fecha</span>
-       </a>
-      </div>
+      <p style="color:#8b93a1;font-size:11.5px;margin-top:8px;max-width:230px;">Sin el dígito de verificación. Ej: si tu cédula es 1.037.581.657, escribe 57.</p>
+     </div>
+     <div id="plazo-resultado" class="hidden mt-5 rounded-2xl p-5 text-center" style="grid-column:1/-1;">
+      <p class="text-xs font-bold uppercase tracking-widest" id="plazo-urgencia"></p>
+      <p class="display-font mt-1 text-2xl md:text-3xl font-bold text-[#0e1a2b]" id="plazo-fecha"></p>
+      <p class="mt-1 text-sm text-slate-600" id="plazo-dias"></p>
+      <a id="plazo-whatsapp" href="#" target="_blank" rel="noopener" class="btn-shine mt-4 inline-flex items-center justify-center gap-2 rounded-xl bg-[#25D366] px-6 py-3 text-sm font-bold text-white no-underline shadow-md transition hover:bg-[#1ebe5b]">
+       <i data-lucide="message-circle" width="18" height="18"></i> <span id="plazo-whatsapp-label">Prepararme antes de esa fecha</span>
+      </a>
      </div>
     </div>
    </section>
 
    <!-- SERVICIOS -->
-   <section id="servicios" class="grid-lines w-full bg-[#edf4f4] px-4 py-16 md:px-10 md:py-24 border-y border-slate-200">
-    <div class="mx-auto max-w-6xl">
-     <div class="text-center max-w-2xl mx-auto">
-      <span class="text-xs font-bold uppercase tracking-widest text-[#0b7a75]">Servicios</span>
-      <h2 class="display-font mt-2 text-2xl font-bold text-[#0b1f33] md:text-4xl">Todo lo que necesitas para estar en regla</h2>
-      <p class="mt-2 text-slate-600 text-sm md:text-base">Acompañamiento tributario pensado para independientes, empleados y rentistas de capital.</p>
+   <section id="servicios" class="wrap" style="padding-block:52px;">
+    <div class="head-row"><h2>Servicios</h2><span class="eyebrow">02 — Acompañamiento</span></div>
+    <div class="serv-grid">
+     <div class="serv-card">
+      <div class="serv-stamp" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5"/><path d="M9.5 14.5l2 2 4-4.5"/></svg></div>
+      <h3>Declaración de renta personas naturales</h3>
+      <div class="serv-perf"></div>
+      <p>Preparación · revisión · presentación ante la DIAN.</p>
+      <a href="https://wa.me/573019028063?text=Hola%2C%20quiero%20cotizar%20mi%20Declaraci%C3%B3n%20de%20Renta" target="_blank" rel="noopener">Cotizar →</a>
      </div>
-
-     <div class="mt-12 grid gap-6 md:grid-cols-3">
-      <article class="card-hover reveal-up relative overflow-hidden rounded-2xl bg-white border border-slate-200 shadow-sm p-6 flex flex-col" style="transition-delay:0ms">
-       <span class="relative flex h-14 w-14 items-center justify-center"><svg width="48" height="48" viewBox="0 0 96 96" class="shrink-0">
-        <defs><linearGradient id="gTeal1" x1="8" y1="8" x2="88" y2="88"><stop offset="0%" stop-color="#14a19b"/><stop offset="100%" stop-color="#0b7a75"/></linearGradient></defs>
-        <rect x="6" y="6" width="84" height="84" rx="22" fill="url(#gTeal1)"/>
-        <path d="M18 30 A34 34 0 0 1 76 28" stroke="#ffffff" stroke-width="3" opacity="0.16" fill="none" stroke-linecap="round"/>
-        <rect x="30" y="24" width="30" height="42" rx="5" fill="#065a56"/>
-        <path d="M56 24 L68 24 L68 34 Z" fill="#054d49"/>
-        <rect x="30" y="22" width="30" height="42" rx="5" fill="#ffffff"/>
-        <path d="M56 22 L68 22 L68 32 Z" fill="#e6f2f1"/>
-        <rect x="36" y="32" width="18" height="3.5" rx="1.75" fill="#c9dedd"/>
-        <rect x="36" y="40" width="14" height="3.5" rx="1.75" fill="#c9dedd"/>
-        <circle cx="66" cy="60" r="13" fill="#eb8a28"/>
-        <path d="M60 60 L65 65 L74 54" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-      </svg><span class="pointer-events-none absolute -right-3 -top-4 select-none font-black text-[#0b7a75]/10" style="font-size:3.2rem;line-height:1;">01</span></span>
-       <h3 class="display-font mt-4 font-bold text-lg text-[#0b1f33]">Declaración de Renta</h3>
-       <p class="mt-2 text-sm text-slate-600 leading-relaxed flex-1">Preparación y presentación de tu declaración ante la DIAN, con revisión de deducciones y beneficios que reducen tu impuesto a pagar.</p>
-       <a href="https://wa.me/573019028063?text=Hola%2C%20quiero%20cotizar%20mi%20Declaraci%C3%B3n%20de%20Renta" target="_blank" rel="noopener" class="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-[#0b7a75] no-underline hover:text-[#09635f]">Cotizar por WhatsApp <i data-lucide="arrow-right" width="14" height="14"></i></a>
-      </article>
-
-      <article class="card-hover reveal-up relative overflow-hidden rounded-2xl bg-white border border-slate-200 shadow-sm p-6 flex flex-col" style="transition-delay:120ms">
-       <span class="relative flex h-14 w-14 items-center justify-center"><svg width="48" height="48" viewBox="0 0 96 96" class="shrink-0">
-        <defs><linearGradient id="gOrange2" x1="8" y1="8" x2="88" y2="88"><stop offset="0%" stop-color="#f5b15d"/><stop offset="100%" stop-color="#eb8a28"/></linearGradient></defs>
-        <rect x="6" y="6" width="84" height="84" rx="22" fill="url(#gOrange2)"/>
-        <path d="M18 30 A34 34 0 0 1 76 28" stroke="#ffffff" stroke-width="3" opacity="0.2" fill="none" stroke-linecap="round"/>
-        <rect x="26" y="52" width="12" height="18" rx="4" fill="#a85c10"/>
-        <rect x="42" y="42" width="12" height="28" rx="4" fill="#a85c10"/>
-        <rect x="58" y="30" width="12" height="40" rx="4" fill="#a85c10"/>
-        <rect x="26" y="50" width="12" height="18" rx="4" fill="#ffffff"/>
-        <rect x="42" y="40" width="12" height="28" rx="4" fill="#ffffff"/>
-        <rect x="58" y="28" width="12" height="40" rx="4" fill="#ffffff"/>
-        <path d="M28 44 L44 32 L60 24 L70 18" stroke="#0b1f33" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M62 18 L70 18 L70 26" stroke="#0b1f33" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg><span class="pointer-events-none absolute -right-3 -top-4 select-none font-black text-[#eb8a28]/10" style="font-size:3.2rem;line-height:1;">02</span></span>
-       <h3 class="display-font mt-4 font-bold text-lg text-[#0b1f33]">Planeación Tributaria</h3>
-       <p class="mt-2 text-sm text-slate-600 leading-relaxed flex-1">Estrategia personalizada durante el año para optimizar tu carga fiscal de forma legal, antes de que llegue la temporada de renta.</p>
-       <a href="https://wa.me/573019028063?text=Hola%2C%20quiero%20cotizar%20Planeaci%C3%B3n%20Tributaria" target="_blank" rel="noopener" class="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-[#0b7a75] no-underline hover:text-[#09635f]">Cotizar por WhatsApp <i data-lucide="arrow-right" width="14" height="14"></i></a>
-      </article>
-
-      <article class="card-hover reveal-up relative overflow-hidden rounded-2xl bg-white border border-slate-200 shadow-sm p-6 flex flex-col" style="transition-delay:240ms">
-       <span class="relative flex h-14 w-14 items-center justify-center"><svg width="48" height="48" viewBox="0 0 96 96" class="shrink-0">
-        <defs><linearGradient id="gBlue3" x1="8" y1="8" x2="88" y2="88"><stop offset="0%" stop-color="#1a4d85"/><stop offset="100%" stop-color="#123c69"/></linearGradient></defs>
-        <rect x="6" y="6" width="84" height="84" rx="22" fill="url(#gBlue3)"/>
-        <path d="M18 30 A34 34 0 0 1 76 28" stroke="#ffffff" stroke-width="3" opacity="0.16" fill="none" stroke-linecap="round"/>
-        <path d="M48 22 L70 30 V50 C70 64 60 74 48 80 C36 74 26 64 26 50 V30 Z" fill="#08213c"/>
-        <path d="M48 20 L70 28 V48 C70 62 60 72 48 78 C36 72 26 62 26 48 V28 Z" fill="#ffffff"/>
-        <path d="M40 50 C40 44 44 40 48 40 C52 40 56 44 56 50 C56 56 48 62 48 62 C48 62 40 56 40 50 Z" fill="#eb8a28"/>
-      </svg><span class="pointer-events-none absolute -right-3 -top-4 select-none font-black text-[#123c69]/10" style="font-size:3.2rem;line-height:1;">03</span></span>
-       <h3 class="display-font mt-4 font-bold text-lg text-[#0b1f33]">Seguridad Social</h3>
-       <p class="mt-2 text-sm text-slate-600 leading-relaxed flex-1">Liquidación correcta de aportes para independientes y por honorarios, evitando pagos de más o inconsistencias con la UGPP.</p>
-       <a href="https://wa.me/573019028063?text=Hola%2C%20quiero%20cotizar%20mi%20liquidaci%C3%B3n%20de%20Seguridad%20Social" target="_blank" rel="noopener" class="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-[#0b7a75] no-underline hover:text-[#09635f]">Cotizar por WhatsApp <i data-lucide="arrow-right" width="14" height="14"></i></a>
-      </article>
+     <div class="serv-card">
+      <div class="serv-stamp" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18"/><path d="M8 3v4M16 3v4"/><path d="M8 16l3-3 2 2 3-4"/></svg></div>
+      <h3>Planeación tributaria</h3>
+      <div class="serv-perf"></div>
+      <p>Gestión fiscal anticipada. El impuesto no se gestiona en la fecha de vencimiento, se construye durante el año.</p>
+      <a href="https://wa.me/573019028063?text=Hola%2C%20quiero%20cotizar%20Planeaci%C3%B3n%20Tributaria" target="_blank" rel="noopener">Cotizar →</a>
+     </div>
+     <div class="serv-card">
+      <div class="serv-stamp" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M9 12h6M9 12l2.5-2.5M9 12l2.5 2.5"/></svg></div>
+      <h3>Devoluciones de saldo a favor</h3>
+      <div class="serv-perf"></div>
+      <p>Recuperación legal de tu liquidez. Retomamos el control de los saldos retenidos ante la DIAN con respaldo técnico y documental.</p>
+      <a href="https://wa.me/573019028063?text=Hola%2C%20quiero%20cotizar%20la%20devoluci%C3%B3n%20de%20mi%20saldo%20a%20favor" target="_blank" rel="noopener">Cotizar →</a>
      </div>
     </div>
    </section>
 
-   <!-- CALCULADORA CTA -->
-   <section class="w-full bg-white px-4 py-16 md:px-10 md:py-20">
-    <div class="reveal-up mx-auto max-w-4xl rounded-3xl bg-[#0b1f33] p-8 md:p-12 text-white text-center relative overflow-hidden">
-     <div class="hero-blob b1" style="opacity:.35;"></div>
-     <div class="relative z-10">
-      <span class="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5 text-xs font-semibold text-[#f5b15d]"><i data-lucide="calculator" width="14" height="14"></i> Herramienta gratuita</span>
-      <h2 class="display-font mt-4 text-2xl md:text-3xl font-bold">¿Estás obligado a declarar renta?</h2>
-      <p class="mt-2 text-slate-300 text-sm md:text-base max-w-xl mx-auto">Sube tu reporte de Información Exógena o digita tus valores. Te decimos en segundos si aplicas, bajo la normativa vigente para el año gravable 2025.</p>
-      <a href="/calculadora-renta" class="btn-shine mt-6 inline-flex items-center justify-center gap-2 rounded-xl bg-[#eb8a28] px-8 py-4 text-sm font-bold text-[#0b1f33] no-underline transition hover:bg-[#f5b15d]">
-       <span>Evaluar mi situación</span> <i data-lucide="arrow-right" width="18" height="18"></i>
-      </a>
-     </div>
+   <!-- METODOLOGÍA -->
+   <section id="metodo" class="wrap" style="padding-block:52px;">
+    <div class="head-row"><h2>Metodología de trabajo</h2><span class="eyebrow">03 — Cómo trabajo</span></div>
+    <div class="metodo">
+     <div class="metodo-cell"><span class="mono">01</span><h3>Auditoría y Conciliación Documental</h3><p>No nos limitamos a descargar lo que reporta la DIAN. Auditamos la información exógena cruzándola contra tus certificados reales, extractos y soportes para detectar inconsistencias de terceros antes de liquidar.</p></div>
+     <div class="metodo-cell"><span class="mono">02</span><h3>Depuración Cedular y Modelación</h3><p>Aplicamos la depuración técnica paso a paso en cada cédula. Evaluamos límites de rentas exentas, deducciones imputables y costos fiscales para determinar la estructura más eficiente dentro del marco legal.</p></div>
+     <div class="metodo-cell"><span class="mono">03</span><h3>Sesión Técnica de Validaciones y Criterio</h3><p>Revisamos juntos los escenarios de liquidación. Te expongo las decisiones técnicas adoptadas, el origen exacto del resultado y los aspectos clave a considerar para tu estrategia del siguiente periodo.</p></div>
+     <div class="metodo-cell"><span class="mono">04</span><h3>Transmisión, Firma y Blindaje</h3><p>Presentamos la declaración ante la DIAN previa validación final de firmas y requisitos formales. Te entregamos el expediente completo con la trazabilidad y soportes que respaldan la firmeza de tu declaración.</p></div>
     </div>
    </section>
 
    <!-- SOBRE MÍ -->
-   <section id="sobre-mi" class="w-full bg-[#f8fafc] px-4 py-16 md:px-10 md:py-24 border-y border-slate-200">
-    <div class="mx-auto max-w-4xl grid gap-8 md:grid-cols-[auto_1fr] items-center">
-     <div class="reveal-up mx-auto h-36 w-36 md:h-44 md:w-44 rounded-2xl overflow-hidden shadow-lg shrink-0 border-4 border-white ring-1 ring-slate-200" style="transition-delay:0ms">
-      <img src="assets/img/osvaldo-villazon.png" alt="Osvaldo Villazon, Contador Público" class="h-full w-full object-cover">
+   <section id="sobre-mi" class="wrap" style="padding-block:52px;">
+    <div class="about">
+     <div class="about-photo reveal-up" style="border-radius:2px;overflow:hidden;box-shadow:0 10px 24px -12px rgba(14,26,43,.18);" aria-hidden="false">
+      <img src="assets/img/osvaldo-villazon.png" alt="Osvaldo Villazon, Contador Público" style="width:100%;height:100%;object-fit:cover;display:block;">
      </div>
-     <div class="reveal-up text-center md:text-left" style="transition-delay:150ms">
-      <span class="text-xs font-bold uppercase tracking-widest text-[#0b7a75]">Sobre mí</span>
-      <h2 class="display-font mt-2 text-2xl md:text-3xl font-bold text-[#0b1f33]">Osvaldo Villazon, Contador Público</h2>
-      <p class="mt-3 text-slate-600 text-sm md:text-base leading-relaxed">
-       Especialista en tributación y aplicación de NIIF, enfocado en soluciones analíticas y automatización de procesos financieros. Mejor puntaje Saber Pro de mi promoción y nominado al Premio Mérito Empresarial 2025 por la innovación aplicada al sector empresarial.
-      </p>
+     <div class="reveal-up" style="transition-delay:150ms">
+      <span class="eyebrow">Sobre mí</span>
+      <h2 style="margin-top:10px;">Osvaldo Villazón, Contador Público</h2>
+      <p>Especialista en tributación y aplicación de NIIF, enfocado en soluciones analíticas y automatización de procesos financieros.</p>
+      <p>Mejor puntaje Saber Pro de mi promoción y nominado al Premio Mérito Empresarial 2025 por la innovación aplicada al sector empresarial.</p>
      </div>
     </div>
    </section>
@@ -297,52 +389,52 @@
     <div class="mx-auto max-w-6xl">
      <div class="text-center max-w-2xl mx-auto">
       <span class="text-xs font-bold uppercase tracking-widest text-[#0b7a75]">Lo que dicen mis clientes</span>
-      <h2 class="display-font mt-2 text-2xl font-bold text-[#0b1f33] md:text-4xl">Confianza que se nota</h2>
+      <h2 class="display-font mt-2 text-2xl font-bold text-[#0e1a2b] md:text-4xl">Confianza que se nota</h2>
      </div>
      <div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
       <article class="chat-bubble reveal-up flex flex-col" style="transition-delay:0ms">
-       <div class="flex gap-1 text-[#eb8a28]">
+       <div class="flex gap-1 text-[#c2571c]">
         <i data-lucide="star" width="16" height="16" fill="currentColor"></i><i data-lucide="star" width="16" height="16" fill="currentColor"></i><i data-lucide="star" width="16" height="16" fill="currentColor"></i><i data-lucide="star" width="16" height="16" fill="currentColor"></i><i data-lucide="star" width="16" height="16" fill="currentColor"></i>
        </div>
        <p class="mt-4 text-sm text-slate-700 leading-relaxed flex-1">"El equipo tiene un conocimiento técnico impresionante y me ayudó a resolver cada una de mis dudas con total claridad."</p>
-       <p class="mt-4 text-xs font-bold text-[#0b1f33]">Andrés R. <span class="font-normal text-slate-500">· Persona natural, Bogotá</span></p>
+       <p class="mt-4 text-xs font-bold text-[#0e1a2b]">Andrés R. <span class="font-normal text-slate-500">· Persona natural, Bogotá</span></p>
       </article>
       <article class="chat-bubble reveal-up flex flex-col" style="transition-delay:100ms">
-       <div class="flex gap-1 text-[#eb8a28]">
+       <div class="flex gap-1 text-[#c2571c]">
         <i data-lucide="star" width="16" height="16" fill="currentColor"></i><i data-lucide="star" width="16" height="16" fill="currentColor"></i><i data-lucide="star" width="16" height="16" fill="currentColor"></i><i data-lucide="star" width="16" height="16" fill="currentColor"></i><i data-lucide="star" width="16" height="16" fill="currentColor"></i>
        </div>
        <p class="mt-4 text-sm text-slate-700 leading-relaxed flex-1">"Muy buen servicio; siempre estuvo dispuesto a explicarme y aclarar todas mis preguntas."</p>
-       <p class="mt-4 text-xs font-bold text-[#0b1f33]">Diana M. <span class="font-normal text-slate-500">· Independiente, Medellín</span></p>
+       <p class="mt-4 text-xs font-bold text-[#0e1a2b]">Diana M. <span class="font-normal text-slate-500">· Independiente, Medellín</span></p>
       </article>
       <article class="chat-bubble reveal-up flex flex-col" style="transition-delay:200ms">
-       <div class="flex gap-1 text-[#eb8a28]">
+       <div class="flex gap-1 text-[#c2571c]">
         <i data-lucide="star" width="16" height="16" fill="currentColor"></i><i data-lucide="star" width="16" height="16" fill="currentColor"></i><i data-lucide="star" width="16" height="16" fill="currentColor"></i><i data-lucide="star" width="16" height="16" fill="currentColor"></i><i data-lucide="star" width="16" height="16" fill="currentColor"></i>
        </div>
        <p class="mt-4 text-sm text-slate-700 leading-relaxed flex-1">"Osvaldo es amable, claro y eficiente. Ya es el segundo año que me atiende y sigo tan satisfecho como la primera vez."</p>
-       <p class="mt-4 text-xs font-bold text-[#0b1f33]">Camilo T. <span class="font-normal text-slate-500">· Cliente recurrente, Cali</span></p>
+       <p class="mt-4 text-xs font-bold text-[#0e1a2b]">Camilo T. <span class="font-normal text-slate-500">· Cliente recurrente, Cali</span></p>
       </article>
       <article class="chat-bubble reveal-up flex flex-col" style="transition-delay:300ms">
-       <div class="flex gap-1 text-[#eb8a28]">
+       <div class="flex gap-1 text-[#c2571c]">
         <i data-lucide="star" width="16" height="16" fill="currentColor"></i><i data-lucide="star" width="16" height="16" fill="currentColor"></i><i data-lucide="star" width="16" height="16" fill="currentColor"></i><i data-lucide="star" width="16" height="16" fill="currentColor"></i><i data-lucide="star" width="16" height="16" fill="currentColor"></i>
        </div>
        <p class="mt-4 text-sm text-slate-700 leading-relaxed flex-1">"Excelente acompañamiento de principio a fin durante todo el proceso de mi declaración de renta."</p>
-       <p class="mt-4 text-xs font-bold text-[#0b1f33]">Laura S. <span class="font-normal text-slate-500">· Persona natural, Barranquilla</span></p>
+       <p class="mt-4 text-xs font-bold text-[#0e1a2b]">Laura S. <span class="font-normal text-slate-500">· Persona natural, Barranquilla</span></p>
       </article>
      </div>
     </div>
    </section>
 
    <!-- FAQ -->
-   <section id="faq" class="w-full bg-[#f8fafc] px-4 py-16 md:px-10 md:py-20 border-b border-slate-200">
+   <section id="faq" class="w-full bg-[#f7f4ee] px-4 py-16 md:px-10 md:py-20 border-b border-slate-200">
     <div class="mx-auto max-w-3xl">
      <div class="text-center">
       <span class="text-xs font-bold uppercase tracking-widest text-[#0b7a75]">Preguntas frecuentes</span>
-      <h2 class="display-font mt-2 text-2xl font-bold text-[#0b1f33] md:text-4xl">Dudas comunes sobre tu declaración</h2>
+      <h2 class="display-font mt-2 text-2xl font-bold text-[#0e1a2b] md:text-4xl">Dudas comunes sobre tu declaración</h2>
      </div>
      <div class="mt-10 divide-y divide-slate-200 border-t border-b border-slate-200" id="faq-list">
       <div class="reveal-up faq-item">
        <button class="faq-toggle w-full flex items-center justify-between gap-4 p-5 text-left" aria-expanded="false">
-        <span class="font-bold text-[#0b1f33] text-sm md:text-base">¿Cómo sé si debo declarar renta?</span>
+        <span class="font-bold text-[#0e1a2b] text-sm md:text-base">¿Cómo sé si debo declarar renta?</span>
         <i data-lucide="chevron-down" class="faq-icon shrink-0 text-[#0b7a75] transition-transform" width="20" height="20"></i>
        </button>
        <div class="faq-panel px-5 pb-5 text-sm text-slate-600 leading-relaxed" hidden>
@@ -351,7 +443,7 @@
       </div>
       <div class="reveal-up faq-item" style="transition-delay:60ms">
        <button class="faq-toggle w-full flex items-center justify-between gap-4 p-5 text-left" aria-expanded="false">
-        <span class="font-bold text-[#0b1f33] text-sm md:text-base">¿Qué documentos necesito para declarar?</span>
+        <span class="font-bold text-[#0e1a2b] text-sm md:text-base">¿Qué documentos necesito para declarar?</span>
         <i data-lucide="chevron-down" class="faq-icon shrink-0 text-[#0b7a75] transition-transform" width="20" height="20"></i>
        </button>
        <div class="faq-panel px-5 pb-5 text-sm text-slate-600 leading-relaxed" hidden>
@@ -360,7 +452,7 @@
       </div>
       <div class="reveal-up faq-item" style="transition-delay:120ms">
        <button class="faq-toggle w-full flex items-center justify-between gap-4 p-5 text-left" aria-expanded="false">
-        <span class="font-bold text-[#0b1f33] text-sm md:text-base">¿Qué pasa si declaro tarde o no declaro?</span>
+        <span class="font-bold text-[#0e1a2b] text-sm md:text-base">¿Qué pasa si declaro tarde o no declaro?</span>
         <i data-lucide="chevron-down" class="faq-icon shrink-0 text-[#0b7a75] transition-transform" width="20" height="20"></i>
        </button>
        <div class="faq-panel px-5 pb-5 text-sm text-slate-600 leading-relaxed" hidden>
@@ -369,7 +461,7 @@
       </div>
       <div class="reveal-up faq-item" style="transition-delay:180ms">
        <button class="faq-toggle w-full flex items-center justify-between gap-4 p-5 text-left" aria-expanded="false">
-        <span class="font-bold text-[#0b1f33] text-sm md:text-base">Soy independiente por honorarios, ¿aplica igual para mí?</span>
+        <span class="font-bold text-[#0e1a2b] text-sm md:text-base">Soy independiente por honorarios, ¿aplica igual para mí?</span>
         <i data-lucide="chevron-down" class="faq-icon shrink-0 text-[#0b7a75] transition-transform" width="20" height="20"></i>
        </button>
        <div class="faq-panel px-5 pb-5 text-sm text-slate-600 leading-relaxed" hidden>
@@ -378,7 +470,7 @@
       </div>
       <div class="reveal-up faq-item" style="transition-delay:240ms">
        <button class="faq-toggle w-full flex items-center justify-between gap-4 p-5 text-left" aria-expanded="false">
-        <span class="font-bold text-[#0b1f33] text-sm md:text-base">¿Cuánto cuesta el servicio?</span>
+        <span class="font-bold text-[#0e1a2b] text-sm md:text-base">¿Cuánto cuesta el servicio?</span>
         <i data-lucide="chevron-down" class="faq-icon shrink-0 text-[#0b7a75] transition-transform" width="20" height="20"></i>
        </button>
        <div class="faq-panel px-5 pb-5 text-sm text-slate-600 leading-relaxed" hidden>
@@ -395,7 +487,7 @@
      <div class="reveal-up flex items-end justify-between flex-wrap gap-4">
       <div>
        <span class="text-xs font-bold uppercase tracking-widest text-[#0b7a75]">Actualidad Tributaria</span>
-       <h2 class="display-font mt-2 text-2xl md:text-4xl font-bold text-[#0b1f33]">Blog</h2>
+       <h2 class="display-font mt-2 text-2xl md:text-4xl font-bold text-[#0e1a2b]">Blog</h2>
       </div>
       <a href="/blog" class="text-sm font-bold text-[#0b7a75] no-underline hover:text-[#09635f] inline-flex items-center gap-1.5">Ver todos los artículos <i data-lucide="arrow-right" width="14" height="14"></i></a>
      </div>
@@ -409,10 +501,10 @@
    </section>
 
    <!-- SUSCRIPCIÓN -->
-   <section class="w-full bg-[#edf4f4] px-4 py-12 md:px-10 md:py-16 border-b border-slate-200">
+   <section class="w-full bg-[#efe9dd] px-4 py-12 md:px-10 md:py-16 border-b border-slate-200">
     <div class="reveal-up mx-auto max-w-2xl text-center">
-     <span class="flex h-11 w-11 mx-auto items-center justify-center rounded-xl bg-[#0b1f33] text-white"><i data-lucide="mail" width="20" height="20"></i></span>
-     <h2 class="display-font mt-4 text-xl md:text-2xl font-bold text-[#0b1f33]">No te pierdas ningún artículo</h2>
+     <span class="flex h-11 w-11 mx-auto items-center justify-center rounded-xl bg-[#0e1a2b] text-white"><i data-lucide="mail" width="20" height="20"></i></span>
+     <h2 class="display-font mt-4 text-xl md:text-2xl font-bold text-[#0e1a2b]">No te pierdas ningún artículo</h2>
      <p class="mt-2 text-sm text-slate-600">Recibe en tu correo los análisis tributarios apenas se publican. Sin spam.</p>
      <form id="newsletter-form" class="mt-5 flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
       <input id="newsletter-email" type="email" required placeholder="tu@correo.com"
@@ -424,10 +516,10 @@
    </section>
 
    <!-- CONTACTO -->
-   <section id="contacto" class="grid-lines w-full bg-[#edf4f4] px-4 py-16 md:px-10 md:py-20 border-t border-slate-200">
+   <section id="contacto" class="grid-lines w-full bg-[#efe9dd] px-4 py-16 md:px-10 md:py-20 border-t border-slate-200">
     <div class="mx-auto max-w-3xl text-center">
      <span class="text-xs font-bold uppercase tracking-widest text-[#0b7a75]">Contacto</span>
-     <h2 class="display-font mt-2 text-2xl md:text-4xl font-bold text-[#0b1f33]">Hablemos de tus impuestos</h2>
+     <h2 class="display-font mt-2 text-2xl md:text-4xl font-bold text-[#0e1a2b]">Hablemos de tus impuestos</h2>
      <p class="mt-2 text-slate-600 text-sm md:text-base">Escríbeme por WhatsApp o déjame tu mensaje aquí abajo.</p>
 
      <div class="mt-8">
@@ -453,7 +545,7 @@
        <label for="c-message" class="block text-xs font-semibold text-slate-700 mb-1">Mensaje</label>
        <textarea id="c-message" required rows="4" placeholder="Cuéntame brevemente tu caso" class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 focus:border-[#0b7a75] focus:outline-none focus:ring-1 focus:ring-[#0b7a75]"></textarea>
       </div>
-      <button id="contact-submit" type="submit" class="btn-shine flex items-center justify-center gap-2 rounded-xl bg-[#0b1f33] px-6 py-4 text-sm font-bold text-white transition hover:bg-[#123c69] shadow-md">
+      <button id="contact-submit" type="submit" class="btn-shine flex items-center justify-center gap-2 rounded-xl bg-[#0e1a2b] px-6 py-4 text-sm font-bold text-white transition hover:bg-[#123c69] shadow-md">
        <i data-lucide="send" width="18" height="18"></i> <span>Enviar Mensaje</span>
       </button>
       <p id="contact-form-message" class="hidden text-center text-sm font-semibold" role="status"></p>
@@ -462,13 +554,20 @@
    </section>
   </main>
 
-  <footer class="w-full bg-[#0b1f33] px-4 py-10 border-t border-slate-800 text-center text-xs text-slate-400">
-   <p class="display-font text-white font-bold text-sm mb-2">Impuesta<span class="text-[#eb8a28]">mente</span></p>
+  <footer class="w-full bg-[#0e1a2b] px-4 py-10 border-t border-slate-800 text-center text-xs text-slate-400">
+   <p class="display-font text-white font-bold text-sm mb-2">Impuesta<span class="text-[#c2571c]">mente</span></p>
    <p>© 2026 Impuestamente. Contenido informativo, no constituye asesoría formal sin un contrato de servicios.</p>
+   <nav class="legal-nav mt-4 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[11px]" aria-label="Legal">
+    <a href="/legal/terminos-y-condiciones">Términos y condiciones</a>
+    <span class="text-slate-600">·</span>
+    <a href="/legal/politica-tratamiento-datos">Política de tratamiento de datos</a>
+    <span class="text-slate-600">·</span>
+    <a href="/legal/autorizacion-datos-personales">Autorización de datos personales</a>
+   </nav>
   </footer>
 
   <div id="mobile-cta-bar" class="mobile-cta-bar">
-   <a href="/calculadora-renta" class="flex items-center justify-center gap-2 rounded-xl bg-[#eb8a28] px-4 py-3 text-sm font-bold text-[#0b1f33] no-underline shadow-lg">
+   <a href="/calculadora-renta" class="flex items-center justify-center gap-2 rounded-xl bg-[#c2571c] px-4 py-3 text-sm font-bold text-[#0e1a2b] no-underline shadow-lg">
     <i data-lucide="calculator" width="18" height="18"></i>
     <span>Evaluar mi situación gratis</span>
    </a>
@@ -581,10 +680,10 @@
 
         grid.innerHTML = posts.slice(0, 3).map(post => `
             <a href="${post.url}" class="card-hover rounded-2xl border border-slate-200 shadow-sm overflow-hidden no-underline text-inherit block">
-             <div class="h-40 bg-slate-100 ${post.imagen ? "" : "bg-gradient-to-br from-[#0b7a75] to-[#0b1f33]"}" style="${post.imagen ? `background-image:url('${post.imagen}');background-size:cover;background-position:center;` : ""}"></div>
+             <div class="h-40 bg-slate-100 ${post.imagen ? "" : "bg-gradient-to-br from-[#0b7a75] to-[#0e1a2b]"}" style="${post.imagen ? `background-image:url('${post.imagen}');background-size:cover;background-position:center;` : ""}"></div>
              <div class="p-5">
               <span class="text-xs font-semibold text-[#0b7a75]">${post.fechaTexto || ""}</span>
-              <h3 class="display-font mt-1 font-bold text-[#0b1f33] line-clamp-2">${post.titulo}</h3>
+              <h3 class="display-font mt-1 font-bold text-[#0e1a2b] line-clamp-2">${post.titulo}</h3>
               <p class="mt-2 text-xs text-slate-500">${post.resumen || ""}</p>
              </div>
             </a>`).join("");
@@ -708,6 +807,41 @@
         new IntersectionObserver((e) => { e.forEach(x => contactoVisible = x.isIntersecting); update(); }, { threshold: 0.05 }).observe(contacto);
       }
     });
+  </script>
+
+  <script>
+  (function(){
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var noHover = window.matchMedia && window.matchMedia('(hover: none)').matches;
+    if (reduce || noHover) return;
+
+    var stage = document.getElementById('stage');
+    var doc = document.getElementById('doc3d');
+    if (stage && doc) {
+      stage.addEventListener('mousemove', function(e){
+        var r = stage.getBoundingClientRect();
+        var x = (e.clientX - r.left) / r.width - 0.5;
+        var y = (e.clientY - r.top) / r.height - 0.5;
+        doc.style.transform = 'rotateY(' + (-22 - x*14) + 'deg) rotateX(' + (8 - y*10) + 'deg)';
+      });
+      stage.addEventListener('mouseleave', function(){
+        doc.style.transform = 'rotateY(-22deg) rotateX(8deg)';
+      });
+    }
+
+    var tiltCards = document.querySelectorAll('.diag-cell, .metodo-cell, .serv-card');
+    tiltCards.forEach(function(card){
+      card.addEventListener('mousemove', function(e){
+        var r = card.getBoundingClientRect();
+        var x = (e.clientX - r.left) / r.width - 0.5;
+        var y = (e.clientY - r.top) / r.height - 0.5;
+        card.style.transform = 'perspective(700px) rotateX(' + (y*-8) + 'deg) rotateY(' + (x*10) + 'deg) translateZ(6px)';
+      });
+      card.addEventListener('mouseleave', function(){
+        card.style.transform = '';
+      });
+    });
+  })();
   </script>
  </body>
 </html>
