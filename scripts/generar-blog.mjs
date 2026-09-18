@@ -35,7 +35,7 @@ const PROSE_CSS = `
   <style>
     .prose-article { color: #1e293b; line-height: 1.75; }
     .prose-article h1, .prose-article h2, .prose-article h3 {
-      font-family: "Space Grotesk", "DM Sans", sans-serif; color: #0b1f33; font-weight: 700;
+      font-family: "Lora", "DM Sans", serif; color: #0b1f33; font-weight: 700;
       margin-top: 1.8em; margin-bottom: 0.6em; letter-spacing: -0.01em;
     }
     .prose-article h1 { font-size: 1.75rem; } .prose-article h2 { font-size: 1.4rem; } .prose-article h3 { font-size: 1.15rem; }
