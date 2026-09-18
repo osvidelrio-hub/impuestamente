@@ -1,0 +1,38 @@
+name: Sincronizar blog desde Notion
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"   # cada 15 minutos
+  workflow_dispatch: {}       # botón "Run workflow" manual en GitHub
+
+permissions:
+  contents: write
+
+jobs:
+  generar-blog:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configurar Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Instalar dependencias
+        run: npm install
+
+      - name: Generar páginas del blog desde Notion
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
+        run: npm run generar-blog
+
+      - name: Publicar cambios si hay artículos nuevos
+        run: |
+          git config user.name "impuestamente-bot"
+          git config user.email "bot@impuestamente.com"
+          git add blog sitemap.xml
+          git diff --staged --quiet || git commit -m "Actualizar blog desde Notion"
+          git push
