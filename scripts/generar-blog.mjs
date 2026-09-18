@@ -113,6 +113,43 @@ function getProp(props, name, type) {
   }
 }
 
+async function descargarImagen(url, slug) {
+  if (!url) return "";
+  try {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const contentType = res.headers.get("content-type") || "";
+    let ext = "jpg";
+    if (contentType.includes("png")) ext = "png";
+    else if (contentType.includes("webp")) ext = "webp";
+    else if (contentType.includes("gif")) ext = "gif";
+    const imgDir = path.join(BLOG_DIR, "images");
+    fs.mkdirSync(imgDir, { recursive: true });
+    const fileName = `${slug}.${ext}`;
+    const buffer = Buffer.from(await res.arrayBuffer());
+    fs.writeFileSync(path.join(imgDir, fileName), buffer);
+    return `/blog/images/${fileName}`;
+  } catch (err) {
+    console.warn(`No se pudo descargar la imagen de "${slug}":`, err.message);
+    return "";
+  }
+}
+
+async function localizarImagenesDelContenido(html, slug) {
+  const regex = /<img src="([^"]+)"/g;
+  let match, i = 0, resultado = html;
+  const reemplazos = [];
+  while ((match = regex.exec(html)) !== null) {
+    reemplazos.push(match[1]);
+  }
+  for (const url of reemplazos) {
+    i++;
+    const localUrl = await descargarImagen(url, `${slug}-contenido-${i}`);
+    if (localUrl) resultado = resultado.replace(url, localUrl);
+  }
+  return resultado;
+}
+
 async function main() {
   fs.mkdirSync(BLOG_DIR, { recursive: true });
 
@@ -141,7 +178,10 @@ async function main() {
     const resumen = getProp(props, "Resumen", "rich_text");
     const categoria = getProp(props, "Categoría", "select");
     const fecha = getProp(props, "Fecha", "date") || page.created_time.slice(0, 10);
-    const imagen = getProp(props, "Imagen", "files") || getProp(props, "Imagen", "url");
+    const imagen = await descargarImagen(
+      getProp(props, "Imagen", "files") || getProp(props, "Imagen", "url"),
+      slug
+    );
 
     if (!titulo || !slug) {
       console.warn("Se omite una fila sin título o slug.");
@@ -150,7 +190,8 @@ async function main() {
 
     const mdBlocks = await n2m.pageToMarkdown(page.id);
     const mdString = n2m.toMarkdownString(mdBlocks).parent || "";
-    const contentHtml = marked.parse(mdString);
+    let contentHtml = marked.parse(mdString);
+    contentHtml = await localizarImagenesDelContenido(contentHtml, slug);
 
     const fechaTexto = new Date(fecha + "T00:00:00").toLocaleDateString("es-CO", {
       day: "numeric", month: "long", year: "numeric",
