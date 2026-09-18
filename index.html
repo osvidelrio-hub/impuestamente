@@ -285,6 +285,22 @@
    </a>
   </div>
 
+  <!-- BOTÓN FLOTANTE DE WHATSAPP -->
+  <a id="whatsapp-float" href="https://wa.me/573019028063?text=Hola%2C%20tengo%20una%20pregunta%20sobre%20mi%20declaraci%C3%B3n%20de%20renta"
+     target="_blank" rel="noopener" aria-label="Escribir por WhatsApp"
+     class="fixed right-4 md:right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-xl transition hover:scale-110 hover:bg-[#1ebe5b] no-underline">
+   <i data-lucide="message-circle" width="26" height="26"></i>
+  </a>
+
+  <style>
+    #whatsapp-float { bottom: 1.5rem; animation: wa-pulse 2.5s infinite; }
+    @media (max-width: 767px) { #whatsapp-float.above-bar { bottom: 5.5rem; } }
+    @keyframes wa-pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(37,211,102,.5); }
+      50% { box-shadow: 0 0 0 10px rgba(37,211,102,0); }
+    }
+  </style>
+
   <script>
     // Calendario Tributario DIAN 2026 - Personas Naturales (Año Gravable 2025)
     // Fila r (1-50) = pareja de dígitos (2r-1, 2r); la fila 50 corresponde a (99, 00)
@@ -451,7 +467,12 @@
       const contacto = document.getElementById("contacto");
       if (mobileCta && hero && contacto && "IntersectionObserver" in window) {
         let heroVisible = true, contactoVisible = false;
-        const update = () => mobileCta.classList.toggle("show", !heroVisible && !contactoVisible);
+        const waFloat = document.getElementById("whatsapp-float");
+        const update = () => {
+          const showBar = !heroVisible && !contactoVisible;
+          mobileCta.classList.toggle("show", showBar);
+          if (waFloat) waFloat.classList.toggle("above-bar", showBar);
+        };
         new IntersectionObserver((e) => { e.forEach(x => heroVisible = x.isIntersecting); update(); }, { threshold: 0.05 }).observe(hero);
         new IntersectionObserver((e) => { e.forEach(x => contactoVisible = x.isIntersecting); update(); }, { threshold: 0.05 }).observe(contacto);
       }
