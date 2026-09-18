@@ -95,7 +95,7 @@
   
  </head>
  <body class="w-full text-slate-900 antialiased bg-[#f8fafc]">
-  <header class="w-full bg-[#0b1f33] px-4 py-4 border-b border-white/10 sticky top-0 z-50 backdrop-blur-md bg-opacity-95">
+    <header class="w-full bg-[#0b1f33] px-4 py-4 border-b border-white/10 sticky top-0 z-50 backdrop-blur-md bg-opacity-95">
    <nav class="mx-auto flex max-w-6xl items-center justify-between gap-4">
     <a href="/" class="display-font flex items-center gap-2.5 text-white no-underline font-bold text-lg">
      <svg class="h-10 w-10 rounded-xl shadow-md shrink-0" viewBox="0 0 96 96" role="img" aria-label="Impuestamente"><defs><clipPath id="hdrLogoClip"><circle cx="48" cy="48" r="42"/></clipPath></defs><g clip-path="url(#hdrLogoClip)"><rect width="96" height="96" fill="#123c69"/><polygon points="0,0 96,0 0,96" fill="#0b1f33"/></g><path d="M20 32 A30 30 0 0 1 74 30" stroke="#ffffff" stroke-width="3" opacity="0.14" fill="none" stroke-linecap="round"/><rect x="41" y="34" width="14" height="32" rx="7" fill="#eb8a28"/><circle cx="48" cy="20" r="7.5" fill="#eb8a28"/><circle cx="45.5" cy="17.5" r="2.2" fill="#ffffff" opacity="0.45"/></svg>
@@ -139,19 +139,5 @@
   <script>
     document.addEventListener("DOMContentLoaded", () => { if (window.lucide) lucide.createIcons(); });
   </script>
- 
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const revealEls = document.querySelectorAll(".reveal-up");
-  if ("IntersectionObserver" in window && revealEls.length) {
-    const obs = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) { entry.target.classList.add("in-view"); obs.unobserve(entry.target); }
-      });
-    }, { threshold: 0.15 });
-    revealEls.forEach((el) => obs.observe(el));
-  }
-});
-</script>
-</body>
+ </body>
 </html>
