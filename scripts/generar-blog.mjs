@@ -122,7 +122,7 @@ async function main() {
     const resp = await notion.databases.query({
       database_id: NOTION_DATABASE_ID,
       start_cursor: cursor,
-      filter: { property: "Estado", select: { equals: "Publicado" } },
+      filter: { property: "Estado", status: { equals: "Publicado" } },
       sorts: [{ property: "Fecha", direction: "descending" }],
     });
     pages.push(...resp.results);
