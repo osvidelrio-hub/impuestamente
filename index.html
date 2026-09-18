@@ -160,6 +160,32 @@
       .plazo-form{flex-wrap:wrap;}
       .plazo-form input{width:100%;}
     }
+    @media (max-width:560px){
+      .wrap{padding-inline:18px;}
+      #diagnostico,#plazo,#servicios,#metodo,#sobre-mi{padding-block:36px !important;}
+      .hero{padding-block:36px 30px;}
+      .head-row{margin-bottom:20px;}
+
+      .stage{height:240px;margin-top:28px;}
+      .doc3d{transform:scale(.78) rotateY(-22deg) rotateX(8deg);}
+      .panel{width:112px;padding:9px 10px;}
+      .panel .lbl{font-size:8.5px;}
+      .panel .val{font-size:12px;}
+
+      .diag-grid{grid-template-columns:1fr;border-left:1px solid var(--rule);}
+      .diag-cell{border-right:none !important;padding:18px 16px;}
+
+      .plazo-box{padding:26px 20px;}
+
+      .serv-grid{border-left:1px solid var(--rule);}
+      .serv-card{padding:20px 18px;}
+      .serv-card h3{padding-right:44px;font-size:1.08rem;}
+
+      .metodo{border-left:1px solid var(--rule);}
+      .metodo-cell{padding:20px 18px;}
+
+      .hero-ctas .btn{flex:1 1 auto;text-align:center;}
+    }
     @media (prefers-reduced-motion: reduce){
       .doc3d{transition:none;}
       .diag-cell,.metodo-cell,.serv-card{transition:none;}
@@ -205,7 +231,7 @@
     <div class="hero-grid">
      <div>
       <span class="eyebrow">Optimización legal de tus impuestos</span>
-      <h1 style="margin-top:14px;">No se trata solo<br class="hidden md:inline">de declarar. <span>Se trata<br class="hidden md:inline">de entender.</span></h1>
+      <h1 style="margin-top:14px;">No se trata solo <br class="hidden md:inline">de declarar. <span>Se trata <br class="hidden md:inline">de entender.</span></h1>
       <p class="lede">Contador especialista en impuestos para personas naturales. Descubre en segundos si estás obligado a declarar y recibe acompañamiento experto para hacerlo bien, sin sanciones ni sorpresas.</p>
       <div class="hero-ctas">
        <a href="/calculadora-renta" class="btn btn-solid">Evaluar mi situación</a>
@@ -813,22 +839,34 @@
   <script>
   (function(){
     var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) return;
     var noHover = window.matchMedia && window.matchMedia('(hover: none)').matches;
-    if (reduce || noHover) return;
 
     var stage = document.getElementById('stage');
     var doc = document.getElementById('doc3d');
     if (stage && doc) {
-      stage.addEventListener('mousemove', function(e){
+      var resetDoc = function(){ doc.style.transform = 'rotateY(-22deg) rotateX(8deg)'; };
+      var tiltDocFromPoint = function(clientX, clientY){
         var r = stage.getBoundingClientRect();
-        var x = (e.clientX - r.left) / r.width - 0.5;
-        var y = (e.clientY - r.top) / r.height - 0.5;
+        var x = (clientX - r.left) / r.width - 0.5;
+        var y = (clientY - r.top) / r.height - 0.5;
         doc.style.transform = 'rotateY(' + (-22 - x*14) + 'deg) rotateX(' + (8 - y*10) + 'deg)';
-      });
-      stage.addEventListener('mouseleave', function(){
-        doc.style.transform = 'rotateY(-22deg) rotateX(8deg)';
-      });
+      };
+      if (!noHover) {
+        stage.addEventListener('mousemove', function(e){ tiltDocFromPoint(e.clientX, e.clientY); });
+        stage.addEventListener('mouseleave', resetDoc);
+      }
+      // En táctil (celular/tablet) el documento gira arrastrando el dedo sobre la imagen,
+      // sin bloquear el scroll de la página (listener pasivo, sin preventDefault).
+      stage.addEventListener('touchmove', function(e){
+        if (!e.touches || !e.touches.length) return;
+        tiltDocFromPoint(e.touches[0].clientX, e.touches[0].clientY);
+      }, { passive: true });
+      stage.addEventListener('touchend', resetDoc);
+      stage.addEventListener('touchcancel', resetDoc);
     }
+
+    if (noHover) return; // el tilt de las tarjetas de abajo se deja solo para mouse (escritorio)
 
     var tiltCards = document.querySelectorAll('.diag-cell, .metodo-cell, .serv-card');
     tiltCards.forEach(function(card){
