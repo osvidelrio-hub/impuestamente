@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-label="Impuestamente">
+  <defs><clipPath id="logoMarkClip"><circle cx="48" cy="48" r="42"/></clipPath></defs>
+  <g clip-path="url(#logoMarkClip)">
+    <rect width="96" height="96" fill="#123c69"/>
+    <polygon points="0,0 96,0 0,96" fill="#0b1f33"/>
+  </g>
+  <path d="M20 32 A30 30 0 0 1 74 30" stroke="#ffffff" stroke-width="3" opacity="0.14" fill="none" stroke-linecap="round"/>
+  <rect x="41" y="34" width="14" height="32" rx="7" fill="#eb8a28"/>
+  <circle cx="48" cy="20" r="7.5" fill="#eb8a28"/>
+  <circle cx="45.5" cy="17.5" r="2.2" fill="#ffffff" opacity="0.45"/>
+</svg>
