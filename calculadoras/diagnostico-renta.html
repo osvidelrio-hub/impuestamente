@@ -88,6 +88,43 @@
     .cta-mini:hover{background:var(--ink);color:var(--paper);}
     .plazo-tab{font-family:"IBM Plex Mono",monospace !important;font-size:12px !important;color:var(--accent) !important;border-bottom:1px dashed var(--accent) !important;padding-bottom:2px;}
 
+    /* ---- hero editorial (misma mecánica 3D del hero de la home) ---- */
+    .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);}
+    .hero{padding-block:52px 44px;}
+    .hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center;}
+    .hero h1{font-weight:600;font-size:clamp(2rem,4vw + .5rem,3.2rem);line-height:1.08;letter-spacing:-.01em;text-wrap:balance;color:var(--ink);margin:14px 0 0;}
+    .hero p.lede{color:var(--ink-soft);font-size:15.5px;max-width:44ch;margin-top:16px;line-height:1.6;}
+    .hero-trust{display:flex;flex-wrap:wrap;gap:20px;font-size:12.5px;color:var(--ink-soft);border-top:1px solid var(--rule);padding-top:18px;margin-top:26px;}
+
+    .stage{position:relative;height:340px;perspective:1400px;touch-action:pan-y;}
+    .doc3d{position:absolute;inset:0;margin:auto;width:200px;height:262px;transform-style:preserve-3d;transform:rotateY(-22deg) rotateX(8deg);transition:transform .3s ease-out;cursor:grab;}
+    .doc-layer{position:absolute;inset:0;border-radius:3px;border:1px solid var(--rule);background:var(--paper-2);overflow:hidden;}
+    .doc-layer.back{transform:translateZ(-16px) translateX(10px) translateY(10px);opacity:.7;}
+    .doc-layer.front{background:#fffdf8;box-shadow:0 28px 50px -18px rgba(14,26,43,.32);}
+    .doc-layer.front svg{display:block;width:100%;height:100%;}
+    .stage .panel{position:absolute;width:132px;background:#fffdf8;border:1px solid var(--rule);border-radius:2px;padding:10px 12px;box-shadow:0 10px 22px -12px rgba(14,26,43,.16);}
+    .stage .panel .plbl{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-soft);}
+    .stage .panel .pval{font-family:"IBM Plex Mono",monospace;font-size:14px;color:var(--accent);margin-top:3px;}
+    .stage .p1{top:4%;left:-4%;} .stage .p2{bottom:8%;right:-6%;}
+    .drag-hint{position:absolute;left:50%;bottom:-24px;transform:translateX(-50%);font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:var(--ink-soft);white-space:nowrap;}
+
+    @media (max-width:900px){
+      .hero-grid{grid-template-columns:1fr;}
+      .stage{height:260px;margin-top:8px;}
+    }
+
+    /* ---- mazo de pasos en 3D (solo escritorio; en móvil sigue el carrusel táctil) ---- */
+    @media (min-width:768px){
+      .guide-deck{position:relative;height:420px;perspective:1300px;}
+      .guide-deck .guide-card{position:absolute !important;inset:0;margin:auto;width:78%;max-width:340px;height:100%;cursor:pointer;transition:transform .45s cubic-bezier(.2,.8,.2,1),box-shadow .45s ease,opacity .45s ease;}
+      .guide-deck .guide-card[data-depth="0"]{transform:translate3d(0,0,0) rotate(0deg);z-index:3;box-shadow:0 26px 48px -18px rgba(14,26,43,.32);opacity:1;}
+      .guide-deck .guide-card[data-depth="1"]{transform:translate3d(26px,22px,-60px) rotate(3deg);z-index:2;box-shadow:0 18px 30px -16px rgba(14,26,43,.24);opacity:.86;}
+      .guide-deck .guide-card[data-depth="2"]{transform:translate3d(52px,44px,-120px) rotate(6deg);z-index:1;box-shadow:0 14px 22px -14px rgba(14,26,43,.18);opacity:.68;}
+      .guide-picker{display:flex;justify-content:center;gap:8px;margin-top:28px;}
+      .guide-picker button{all:unset;cursor:pointer;font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--ink-soft);border:1px solid var(--rule);padding:8px 14px;border-radius:20px;}
+      .guide-picker button[aria-current="true"]{color:var(--paper);background:var(--ink);border-color:var(--ink);}
+    }
+
     .hero-pattern {
       position: relative;
       overflow: hidden;
@@ -220,19 +257,53 @@
    </div>
   </header>
   <main>
-   <section id="inicio" class="canva-banner hero-pattern w-full px-4 py-12 md:px-10 md:py-20 text-white">
-    <div class="hero-blob b1"></div>
-    <div class="hero-blob b2"></div>
-    <div class="hero-blob b3"></div>
-    <div class="hero-inner mx-auto max-w-4xl text-center">
-     <span class="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5 text-xs font-semibold tracking-wide text-[#d9834a] backdrop-blur-md border border-white/10"> <i data-lucide="shield-check" width="16" height="16"></i> <span class="canva-tag">Actualizado para la Declaración 2026 (Año Gravable 2025)</span> </span>
-     <h1 class="display-font mt-6 font-bold leading-[1.05] tracking-tight" style="font-size: clamp(2rem, 5vw + 1rem, 3.75rem);"><span class="canva-text">¿Estás obligado a declarar renta?</span> <br class="hidden md:inline"><span class="canva-text text-[#c2571c]">Descúbrelo en segundos</span></h1>
-     <p class="canva-text mx-auto mt-5 max-w-2xl text-base text-slate-300 md:text-lg leading-relaxed">Sube tu reporte de información exógena en Excel o ingresa tus valores manualmente. Evaluación automática bajo las normativas actuales de la DIAN.</p>
-     <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-      <a href="#calculadora" class="canva-button btn-pulse btn-shine flex w-full sm:w-auto items-center justify-center gap-3 rounded-xl bg-[#c2571c] px-8 py-4 text-base font-bold text-[#0e1a2b] no-underline transition hover:bg-[#d9834a]"> <span>Evaluar Mi Situación Gratis</span> <i data-lucide="arrow-down" width="20" height="20"></i> </a>
+   <section id="inicio" class="wrap hero">
+    <div class="hero-grid">
+     <div>
+      <span class="eyebrow">Actualizado para la Declaración 2026 (Año Gravable 2025)</span>
+      <h1 class="display-font">¿Estás obligado a declarar renta? <span style="color:var(--accent)">Descúbrelo en segundos</span></h1>
+      <p class="lede">Sube tu reporte de información exógena en Excel o ingresa tus valores manualmente. Evaluación automática bajo las normativas actuales de la DIAN.</p>
+      <div class="mt-7">
+       <a href="#calculadora" class="canva-button btn-pulse btn-shine inline-flex items-center justify-center gap-3 rounded-xl bg-[#c2571c] px-8 py-4 text-base font-bold text-[#0e1a2b] no-underline transition hover:bg-[#d9834a]"> <span>Evaluar Mi Situación Gratis</span> <i data-lucide="arrow-down" width="20" height="20"></i> </a>
+      </div>
+      <div class="hero-trust">
+       <span class="flex items-center gap-2"><i data-lucide="lock" style="color:var(--accent)" width="16" height="16"></i> Procesamiento 100% privado en tu dispositivo</span>
+       <span class="flex items-center gap-2"><i data-lucide="check-circle-2" style="color:var(--accent)" width="16" height="16"></i> Sin registros obligatorios para probar</span>
+      </div>
      </div>
-     <div class="mt-10 flex flex-wrap items-center justify-center gap-6 text-xs md:text-sm text-slate-300 border-t border-white/10 pt-6">
-      <span class="flex items-center gap-2"><i data-lucide="lock" class="text-[#c2571c]" width="16" height="16"></i> <span class="canva-text">Procesamiento 100% privado en tu dispositivo</span></span> <span class="flex items-center gap-2"><i data-lucide="check-circle-2" class="text-[#c2571c]" width="16" height="16"></i> <span class="canva-text">Sin registros obligatorios para probar</span></span>
+     <div class="stage" id="hero-stage">
+      <div class="doc3d" id="hero-doc3d">
+       <div class="doc-layer back"></div>
+       <div class="doc-layer front">
+        <svg viewBox="0 0 220 290" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" y="0" width="220" height="290" fill="#fffdf8"/>
+          <text x="12" y="17" font-family="IBM Plex Mono, monospace" font-weight="700" font-size="11" fill="#123c69">DIAN</text>
+          <rect x="12" y="22" width="30" height="2" fill="#c2571c"/>
+          <rect x="166" y="8" width="42" height="20" rx="2" fill="#123c69"/>
+          <text x="187" y="22" font-family="IBM Plex Mono, monospace" font-weight="700" font-size="12" fill="#ffffff" text-anchor="middle">210</text>
+          <text x="12" y="36" font-family="IBM Plex Sans, sans-serif" font-weight="600" font-size="7" fill="#0e1a2b">Declaración de renta</text>
+          <text x="12" y="44" font-family="IBM Plex Sans, sans-serif" font-size="6" fill="#4a5261">Personas naturales · Año gravable 2025</text>
+          <line x1="8" y1="50" x2="212" y2="50" stroke="#123c69" stroke-width="1.5"/>
+          <g font-family="IBM Plex Mono, monospace">
+            <rect x="8" y="60" width="204" height="15" fill="#ffffff" stroke="#d8d0bd" stroke-width="0.75" stroke-dasharray="2 2"/>
+            <text x="12" y="70" font-size="6" fill="#8a8f9a">Ingresos brutos</text>
+            <rect x="8" y="79" width="204" height="15" fill="#c3d6e6" opacity="0.4" stroke="#d8d0bd" stroke-width="0.75" stroke-dasharray="2 2"/>
+            <text x="12" y="89" font-size="6" fill="#8a8f9a">Patrimonio bruto</text>
+            <rect x="8" y="98" width="204" height="15" fill="#ffffff" stroke="#d8d0bd" stroke-width="0.75" stroke-dasharray="2 2"/>
+            <text x="12" y="108" font-size="6" fill="#8a8f9a">Consumos y consignaciones</text>
+            <rect x="8" y="117" width="204" height="15" fill="#c3d6e6" opacity="0.4" stroke="#d8d0bd" stroke-width="0.75" stroke-dasharray="2 2"/>
+            <text x="12" y="127" font-size="6" fill="#8a8f9a">Deducciones y rentas exentas</text>
+            <rect x="8" y="150" width="204" height="30" fill="#efe9dd" stroke="#d8d0bd" stroke-width="0.75" stroke-dasharray="3 3"/>
+            <text x="110" y="168" font-size="7" fill="#4a5261" text-anchor="middle">Sube tus datos para completar</text>
+          </g>
+          <line x1="8" y1="254" x2="212" y2="254" stroke="#d8d0bd" stroke-width="0.75"/>
+          <text x="12" y="266" font-family="IBM Plex Mono, monospace" font-size="5.5" fill="#8a8f9a">Formulario 210 · DIAN</text>
+        </svg>
+       </div>
+      </div>
+      <div class="panel p1"><div class="plbl">¿Debo declarar?</div><div class="pval">—</div></div>
+      <div class="panel p2"><div class="plbl">Topes DIAN 2026</div><div class="pval">—</div></div>
+      <div class="drag-hint">↔ arrastra para inclinar</div>
      </div>
     </div>
    </section>
@@ -245,7 +316,7 @@
       <p class="canva-text mt-2 text-slate-600 text-sm md:text-base">Sigue este procedimiento en el portal oficial de la DIAN para descargar el reporte en Excel.</p>
       <span class="swipe-hint mt-3 items-center gap-1.5 text-xs font-semibold text-[#0b7a75]"><span>Desliza para ver los 3 pasos</span> <i data-lucide="arrow-right" width="14" height="14"></i></span>
      </div>
-     <div class="no-scrollbar mt-12 flex gap-4 overflow-x-auto snap-x snap-mandatory pb-2 -mx-4 px-4 md:mx-0 md:grid md:gap-8 md:grid-cols-3 md:overflow-visible md:px-0 md:pb-0">
+     <div id="guide-deck" class="guide-deck no-scrollbar mt-12 flex gap-4 overflow-x-auto snap-x snap-mandatory pb-2 -mx-4 px-4 md:mx-0 md:grid md:gap-8 md:grid-cols-3 md:overflow-visible md:px-0 md:pb-0">
       <article class="canva-card guide-card reveal-up w-[82%] xs:w-[72%] sm:w-[60%] shrink-0 snap-center md:w-auto md:shrink md:snap-none overflow-hidden rounded-2xl bg-white border border-slate-200 shadow-sm flex flex-col">
        <div class="bg-slate-100 border-b border-slate-200 px-4 py-2 flex items-center justify-between">
         <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-red-400"></span> <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span> <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span></div><span class="canva-text text-[10px] font-mono text-slate-400 uppercase">1. Iniciar Sesión</span>
@@ -294,6 +365,11 @@
        </div>
       </article>
      </div>
+     <nav class="guide-picker hidden md:flex" aria-label="Elegir paso">
+      <button type="button" data-i="0" aria-current="true">01 · Iniciar sesión</button>
+      <button type="button" data-i="1">02 · Buscar Exógena</button>
+      <button type="button" data-i="2">03 · Descargar Excel</button>
+     </nav>
     </div>
    </section>
 
@@ -350,7 +426,7 @@
 
       <label class="flex items-start gap-2 text-xs text-slate-600">
         <input id="dian-consent" type="checkbox" class="mt-0.5 h-4 w-4 text-[#0b7a75] focus:ring-[#0b7a75]" required>
-        <span class="canva-text">Autorizo a Impuestamente a usar mis credenciales de la DIAN únicamente para consultar mi Información Exógena en este momento. Confirmo que mi clave no será almacenada.</span>
+        <span class="canva-text">Autorizo a Impuestamente a usar mis credenciales de la DIAN únicamente para consultar mi Información Exógena en este momento (mi clave no será almacenada), y el <a href="/legal/politica-tratamiento-datos" target="_blank" rel="noopener" class="underline font-semibold text-[#0b7a75]">tratamiento de mis datos personales</a> conforme a la política de Impuestamente.</span>
       </label>
 
       <button id="dian-submit-btn" type="submit" class="canva-button w-full flex items-center justify-center gap-2 rounded-xl bg-[#0b7a75] px-6 py-3 text-sm font-bold text-white transition hover:bg-[#09635f] shadow-md">
@@ -360,15 +436,6 @@
     </form>
 
         <p id="dian-status" class="mt-3 hidden text-xs font-semibold" role="status"></p>
-
-    <div id="dian-price-result" class="hidden mt-4 rounded-2xl border-2 border-[#c2571c] bg-[#fff7ed] p-5 text-center">
-      <p class="canva-text text-xs font-bold uppercase tracking-wider text-[#c2571c]">Tu tarifa estimada</p>
-      <p id="dian-price-value" class="canva-text mt-1 text-3xl font-extrabold text-[#0e1a2b]"></p>
-      <a id="dian-whatsapp-link" href="#" target="_blank" rel="noopener" class="canva-button mt-4 inline-flex items-center justify-center gap-2 rounded-xl bg-[#0b7a75] px-6 py-3 text-sm font-bold text-white transition hover:bg-[#09635f] shadow-md">
-        <i data-lucide="message-circle" width="16" height="16"></i>
-        <span>Continuar por WhatsApp</span>
-      </a>
-    </div>
   </div>
     </div>
       
@@ -417,7 +484,12 @@
          <label for="deposits" class="canva-text block text-xs font-bold text-slate-700 mb-1">Consignaciones bancarias o depósitos</label> 
          <input id="deposits" class="canva-input currency-input w-full rounded-xl border border-slate-300 px-4 py-3 text-slate-900 focus:border-[#0b7a75] focus:ring-1 focus:ring-[#0b7a75]" type="text" inputmode="numeric" placeholder="$ 0">
         </div>
-       </div><button class="canva-button w-full mt-6 flex items-center justify-center gap-2 rounded-xl bg-[#0e1a2b] px-6 py-4 text-base font-bold text-white transition hover:bg-[#123c69] shadow-md" type="submit"> <span>Calcular Diagnóstico</span> <i data-lucide="arrow-right" width="18" height="18"></i> </button>
+       </div>
+       <label class="flex items-start gap-2 text-xs text-slate-600 mt-2">
+        <input id="calc-consent" type="checkbox" class="mt-0.5 h-4 w-4 text-[#0b7a75] focus:ring-[#0b7a75]" required>
+        <span class="canva-text">Autorizo el <a href="/legal/politica-tratamiento-datos" target="_blank" rel="noopener" class="underline font-semibold text-[#0b7a75]">tratamiento de mis datos personales</a> conforme a la política de Impuestamente, únicamente para efectos de este diagnóstico.</span>
+       </label>
+       <button class="canva-button w-full mt-4 flex items-center justify-center gap-2 rounded-xl bg-[#0e1a2b] px-6 py-4 text-base font-bold text-white transition hover:bg-[#123c69] shadow-md" type="submit"> <span>Calcular Diagnóstico</span> <i data-lucide="arrow-right" width="18" height="18"></i> </button>
       </form>
      </div>
      <section id="result-panel" class="mt-6 hidden">
@@ -427,16 +499,29 @@
         <div class="flex-1">
          <h3 class="canva-text font-bold text-amber-950 text-lg">Sí Debes Declarar Renta</h3>
          <p id="result-positive-message" class="mt-1 text-sm text-amber-900 leading-relaxed"></p>
-         <a href="https://wa.me/573019028063?text=Hola%2C%20hice%20el%20diagn%C3%B3stico%20en%20Impuestamente%20y%20seg%C3%BAn%20mis%20valores%20debo%20declarar%20renta.%20Quiero%20asesor%C3%ADa." target="_blank" rel="noopener" class="canva-button mt-4 inline-flex items-center justify-center gap-2 rounded-xl bg-[#25D366] px-6 py-3 text-sm font-bold text-white no-underline shadow-md transition hover:bg-[#1ebe5b]"> <i data-lucide="message-circle" width="18" height="18"></i> <span>Escríbenos por WhatsApp</span> </a>
+         <div class="mt-4 flex flex-wrap items-center gap-3">
+          <a href="https://wa.me/573019028063?text=Hola%2C%20hice%20el%20diagn%C3%B3stico%20en%20Impuestamente%20y%20seg%C3%BAn%20mis%20valores%20debo%20declarar%20renta.%20Quiero%20asesor%C3%ADa." target="_blank" rel="noopener" class="canva-button inline-flex items-center justify-center gap-2 rounded-xl bg-[#25D366] px-6 py-3 text-sm font-bold text-white no-underline shadow-md transition hover:bg-[#1ebe5b]"> <i data-lucide="message-circle" width="18" height="18"></i> <span>Escríbenos por WhatsApp</span> </a>
+          <button type="button" class="price-ask-btn canva-text text-xs font-semibold text-amber-900 underline underline-offset-2" data-target="price-reveal-positive">¿Quieres saber cuánto costaría el servicio?</button>
+         </div>
+         <div id="price-reveal-positive" class="hidden mt-3">
+          <a href="https://wa.me/573019028063?text=Hola%2C%20hice%20el%20diagn%C3%B3stico%20en%20Impuestamente%2C%20debo%20declarar%20renta%20y%20quiero%20saber%20cu%C3%A1nto%20costar%C3%ADa%20el%20servicio." target="_blank" rel="noopener" class="canva-button inline-flex items-center justify-center gap-2 rounded-xl bg-white border border-amber-300 px-5 py-2.5 text-sm font-bold text-amber-900 no-underline shadow-sm transition hover:bg-amber-100"> <i data-lucide="tag" width="16" height="16"></i> <span>Cotizar mi servicio por WhatsApp</span> </a>
+         </div>
         </div>
        </div>
       </div>
       <div id="result-negative" class="canva-panel hidden rounded-2xl border-2 border-emerald-300 bg-emerald-50 p-6 shadow-sm">
        <div class="flex items-start gap-3">
         <i data-lucide="check-circle-2" class="text-emerald-600 shrink-0 mt-0.5" width="24" height="24"></i>
-        <div>
+        <div class="flex-1">
          <h3 class="canva-text font-bold text-emerald-950 text-lg">No Debes Declarar Renta</h3>
          <p id="result-negative-message" class="mt-1 text-sm text-emerald-900 leading-relaxed"></p>
+         <div class="mt-4 flex flex-wrap items-center gap-3">
+          <a href="https://wa.me/573019028063?text=Hola%2C%20hice%20el%20diagn%C3%B3stico%20en%20Impuestamente%20y%20no%20debo%20declarar%20renta%2C%20pero%20tengo%20una%20pregunta." target="_blank" rel="noopener" class="canva-button inline-flex items-center justify-center gap-2 rounded-xl bg-[#25D366] px-6 py-3 text-sm font-bold text-white no-underline shadow-md transition hover:bg-[#1ebe5b]"> <i data-lucide="message-circle" width="18" height="18"></i> <span>Escríbenos por WhatsApp</span> </a>
+          <button type="button" class="price-ask-btn canva-text text-xs font-semibold text-emerald-900 underline underline-offset-2" data-target="price-reveal-negative">¿Quieres saber cuánto costaría el servicio?</button>
+         </div>
+         <div id="price-reveal-negative" class="hidden mt-3">
+          <a href="https://wa.me/573019028063?text=Hola%2C%20hice%20el%20diagn%C3%B3stico%20en%20Impuestamente%2C%20no%20debo%20declarar%20renta%20pero%20quiero%20saber%20cu%C3%A1nto%20costar%C3%ADa%20una%20asesor%C3%ADa%20o%20planeaci%C3%B3n%20tributaria." target="_blank" rel="noopener" class="canva-button inline-flex items-center justify-center gap-2 rounded-xl bg-white border border-emerald-300 px-5 py-2.5 text-sm font-bold text-emerald-900 no-underline shadow-sm transition hover:bg-emerald-100"> <i data-lucide="tag" width="16" height="16"></i> <span>Cotizar un servicio por WhatsApp</span> </a>
+         </div>
         </div>
        </div>
       </div>
@@ -564,15 +649,6 @@
       document.getElementById("card-spending").value = money(result.data.cardSpending);
       document.getElementById("deposits").value = money(result.data.deposits);
       document.getElementById("purchases").value = money(result.data.purchases);
-
-      if (result.price) {
-        document.getElementById("dian-price-value").textContent = money(result.price);
-        const mensaje = encodeURIComponent(
-          `Hola, ya conecté mis datos de la DIAN y mi tarifa estimada es ${money(result.price)}. Quiero continuar con mi declaración de renta.`
-        );
-        document.getElementById("dian-whatsapp-link").href = `https://wa.me/573019028063?text=${mensaje}`;
-        document.getElementById("dian-price-result").classList.remove("hidden");
-      }
 
       dianStatus("¡Datos cargados exitosamente desde la DIAN!", "success");
       document.getElementById("dian-clave").value = "";
@@ -863,6 +939,66 @@
 
     document.addEventListener("DOMContentLoaded", () => {
       if (window.lucide) lucide.createIcons();
+
+      // El costo del servicio solo se muestra si el usuario lo pide explícitamente,
+      // nunca automáticamente junto con el diagnóstico.
+      document.querySelectorAll(".price-ask-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const target = document.getElementById(btn.dataset.target);
+          if (!target) return;
+          target.classList.remove("hidden");
+          btn.classList.add("hidden");
+        });
+      });
+
+      // Formulario 210 del hero: se inclina en 3D con el mouse y con el dedo (igual que la home)
+      (function(){
+        var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (reduceMotion) return;
+        var stage = document.getElementById('hero-stage');
+        var doc = document.getElementById('hero-doc3d');
+        if (!stage || !doc) return;
+        var noHover = window.matchMedia && window.matchMedia('(hover: none)').matches;
+        var resetDoc = function(){ doc.style.transform = 'rotateY(-22deg) rotateX(8deg)'; };
+        var tiltFromPoint = function(clientX, clientY){
+          var r = stage.getBoundingClientRect();
+          var x = (clientX - r.left) / r.width - 0.5;
+          var y = (clientY - r.top) / r.height - 0.5;
+          doc.style.transform = 'rotateY(' + (-22 - x*16) + 'deg) rotateX(' + (8 - y*12) + 'deg)';
+        };
+        if (!noHover) {
+          stage.addEventListener('mousemove', function(e){ tiltFromPoint(e.clientX, e.clientY); });
+          stage.addEventListener('mouseleave', resetDoc);
+        }
+        stage.addEventListener('touchmove', function(e){
+          if (!e.touches || !e.touches.length) return;
+          tiltFromPoint(e.touches[0].clientX, e.touches[0].clientY);
+        }, { passive: true });
+        stage.addEventListener('touchend', resetDoc);
+      })();
+
+      // Guía de 3 pasos como mazo de fichas en 3D (solo en escritorio; en móvil sigue el carrusel táctil)
+      (function(){
+        var deck = document.getElementById('guide-deck');
+        if (!deck) return;
+        var cards = Array.prototype.slice.call(deck.querySelectorAll('.guide-card'));
+        var pickerBtns = Array.prototype.slice.call(document.querySelectorAll('.guide-picker button'));
+        var order = cards.map(function(_, i){ return i; });
+        var render = function(){
+          cards.forEach(function(c, i){
+            var depth = order.indexOf(i);
+            c.setAttribute('data-depth', String(depth));
+          });
+          pickerBtns.forEach(function(b){ b.setAttribute('aria-current', String(parseInt(b.dataset.i, 10) === order[0])); });
+        };
+        var bringFront = function(i){
+          order = [i].concat(order.filter(function(v){ return v !== i; }));
+          render();
+        };
+        cards.forEach(function(c, i){ c.addEventListener('click', function(){ bringFront(i); }); });
+        pickerBtns.forEach(function(b){ b.addEventListener('click', function(){ bringFront(parseInt(b.dataset.i, 10)); }); });
+        render();
+      })();
 
       // Animacion de aparicion progresiva al hacer scroll
       const revealEls = document.querySelectorAll(".reveal-up");
