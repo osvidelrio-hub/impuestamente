@@ -503,8 +503,11 @@
           <a href="https://wa.me/573019028063?text=Hola%2C%20hice%20el%20diagn%C3%B3stico%20en%20Impuestamente%20y%20seg%C3%BAn%20mis%20valores%20debo%20declarar%20renta.%20Quiero%20asesor%C3%ADa." target="_blank" rel="noopener" class="canva-button inline-flex items-center justify-center gap-2 rounded-xl bg-[#25D366] px-6 py-3 text-sm font-bold text-white no-underline shadow-md transition hover:bg-[#1ebe5b]"> <i data-lucide="message-circle" width="18" height="18"></i> <span>Escríbenos por WhatsApp</span> </a>
           <button type="button" class="price-ask-btn canva-text text-xs font-semibold text-amber-900 underline underline-offset-2" data-target="price-reveal-positive">¿Quieres saber cuánto costaría el servicio?</button>
          </div>
-         <div id="price-reveal-positive" class="hidden mt-3">
-          <a href="https://wa.me/573019028063?text=Hola%2C%20hice%20el%20diagn%C3%B3stico%20en%20Impuestamente%2C%20debo%20declarar%20renta%20y%20quiero%20saber%20cu%C3%A1nto%20costar%C3%ADa%20el%20servicio." target="_blank" rel="noopener" class="canva-button inline-flex items-center justify-center gap-2 rounded-xl bg-white border border-amber-300 px-5 py-2.5 text-sm font-bold text-amber-900 no-underline shadow-sm transition hover:bg-amber-100"> <i data-lucide="tag" width="16" height="16"></i> <span>Cotizar mi servicio por WhatsApp</span> </a>
+         <div id="price-reveal-positive" class="hidden mt-3 rounded-xl border border-amber-300 bg-white p-4">
+          <p class="canva-text text-[11px] font-bold uppercase tracking-wider text-amber-800">Tarifa estimada de tu declaración</p>
+          <p id="price-value-positive" class="canva-text mt-1 text-2xl font-extrabold text-[#0e1a2b]"></p>
+          <p class="canva-text mt-1 text-[11px] text-amber-800">Valor de referencia según lo que ingresaste; se confirma por WhatsApp antes de empezar.</p>
+          <a id="price-wa-positive" href="#" target="_blank" rel="noopener" class="canva-button mt-3 inline-flex items-center justify-center gap-2 rounded-xl bg-white border border-amber-300 px-5 py-2.5 text-sm font-bold text-amber-900 no-underline shadow-sm transition hover:bg-amber-100"> <i data-lucide="message-circle" width="16" height="16"></i> <span id="price-wa-positive-label">Continuar por WhatsApp</span> </a>
          </div>
         </div>
        </div>
@@ -581,11 +584,29 @@
     let pendingDiagnosis = null;
     const errorEl = document.getElementById("calculator-error");
 
-    const money = value => new Intl.NumberFormat("es-CO", { 
-      style: "currency", 
-      currency: "COP", 
-      maximumFractionDigits: 0 
+    const money = value => new Intl.NumberFormat("es-CO", {
+      style: "currency",
+      currency: "COP",
+      maximumFractionDigits: 0
     }).format(value);
+
+    // Misma tabla de tarifas que usa dian-rpa-backend/pricing.js para la declaración
+    // de renta, aplicada aquí solo para mostrar un ESTIMADO al usuario cuando lo pide
+    // (nunca automático; la cotización real siempre se confirma por WhatsApp).
+    function calcularTarifaEstimada({ income = 0, assets = 0, deposits = 0 }) {
+      const M50 = 50_000_000, M70 = 70_000_000, M170 = 170_000_000, M200 = 200_000_000, M300 = 300_000_000, M500 = 500_000_000;
+      const reglas = [
+        { price: 200000, test: () => income < M50 && assets < M170 },
+        { price: 300000, test: () => income < M50 && assets >= M170 && assets < M300 },
+        { price: 300000, test: () => income >= M50 && income < M200 && assets < M170 },
+        { price: 350000, test: () => income >= M50 && income < M200 && assets >= M170 },
+        { price: 400000, test: () => income >= M200 && income < M500 },
+        { price: 500000, test: () => income >= M500 || assets >= M300 },
+        { price: 400000, test: () => deposits >= M170 && income < M70 },
+      ];
+      const coincidencias = reglas.filter(r => r.test()).map(r => r.price);
+      return coincidencias.length ? Math.max(...coincidencias) : 500000;
+    }
 
   const DIAN_BACKEND_URL = "https://impuestamente-production.up.railway.app/api/dian-exogena";
 
@@ -924,6 +945,13 @@
 
         if (positive) {
           document.getElementById("result-positive-message").textContent = `Superas o igualas el tope en: ${reasons.join(", ")}. Escríbenos por WhatsApp y te ayudamos a presentarla sin errores.`;
+
+          const tarifaEstimada = calcularTarifaEstimada({ income, assets, deposits });
+          document.getElementById("price-value-positive").textContent = money(tarifaEstimada);
+          const mensajePrecio = encodeURIComponent(
+            `Hola, hice el diagnóstico en Impuestamente, debo declarar renta y vi que mi tarifa estimada es ${money(tarifaEstimada)}. Quiero confirmar y continuar con mi declaración.`
+          );
+          document.getElementById("price-wa-positive").href = `https://wa.me/573019028063?text=${mensajePrecio}`;
         } else {
           document.getElementById("result-negative-message").textContent = "Con los valores que ingresaste, no superas ninguno de los topes que obligan a declarar renta este año.";
         }
