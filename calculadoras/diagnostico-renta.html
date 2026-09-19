@@ -570,6 +570,22 @@
     <span>Evaluar mi situación gratis</span>
    </a>
   </div>
+
+  <!-- BOTÓN FLOTANTE DE WHATSAPP -->
+  <a id="whatsapp-float" href="https://wa.me/573019028063?text=Hola%2C%20tengo%20una%20pregunta%20sobre%20mi%20declaraci%C3%B3n%20de%20renta"
+     target="_blank" rel="noopener" aria-label="Escribir por WhatsApp"
+     class="fixed right-4 md:right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-xl transition hover:scale-110 hover:bg-[#1ebe5b] no-underline">
+   <i data-lucide="message-circle" width="26" height="26"></i>
+  </a>
+
+  <style>
+    #whatsapp-float { bottom: 1.5rem; animation: wa-pulse 2.5s infinite; }
+    @media (max-width: 767px) { #whatsapp-float.above-bar { bottom: 5.5rem; } }
+    @keyframes wa-pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(37,211,102,.5); }
+      50% { box-shadow: 0 0 0 10px rgba(37,211,102,0); }
+    }
+  </style>
   <script>
     // Topes DIAN año gravable 2025 (declaración 2026), en UVT ($49.799 c/u).
     // El patrimonio bruto tiene un tope distinto (4.500 UVT) al de los demás
@@ -692,8 +708,8 @@
 
     document.querySelectorAll(".currency-input").forEach(input => {
       input.addEventListener("input", e => {
-        const numeric = getNumericValue(e.target);
-        e.target.value = numeric === 0 ? "" : money(numeric);
+        const cleanStr = String(e.target.value || "").replace(/[^\d]/g, "");
+        e.target.value = cleanStr === "" ? "" : money(Number(cleanStr));
       });
     });
 
@@ -1050,9 +1066,11 @@
         let heroVisible = true;
         let calcVisible = false;
 
+        const waFloat = document.getElementById("whatsapp-float");
         const updateBar = () => {
           const shouldShow = !heroVisible && !calcVisible;
           mobileCta.classList.toggle("show", shouldShow);
+          if (waFloat) waFloat.classList.toggle("above-bar", shouldShow);
         };
 
         new IntersectionObserver((entries) => {
