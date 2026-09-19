@@ -1,11 +1,26 @@
-  <footer class="w-full bg-[#0b1f33] px-4 py-10 border-t border-slate-800 text-center text-xs text-slate-400">
-   <p class="display-font text-white font-bold text-sm mb-2">Impuesta<span class="text-[#eb8a28]">mente</span></p>
+<footer class="w-full bg-[#0e1a2b] px-4 py-10 border-t border-slate-800 text-center text-xs text-slate-400">
+   <p class="display-font text-white font-bold text-sm mb-2">Impuesta<span class="text-[#c2571c]">mente</span></p>
    <p>© 2026 Impuestamente. Contenido informativo, no constituye asesoría formal sin un contrato de servicios.</p>
-   <nav class="mt-4 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[11px]" aria-label="Legal">
-    <a href="/legal/terminos-y-condiciones" style="color:#94a3b8;text-decoration:none;">Términos y condiciones</a>
+   <nav class="legal-nav mt-4 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[11px]" aria-label="Legal">
+    <a href="/legal/terminos-y-condiciones">Términos y condiciones</a>
     <span class="text-slate-600">·</span>
-    <a href="/legal/politica-tratamiento-datos" style="color:#94a3b8;text-decoration:none;">Política de tratamiento de datos</a>
+    <a href="/legal/politica-tratamiento-datos">Política de tratamiento de datos</a>
     <span class="text-slate-600">·</span>
-    <a href="/legal/autorizacion-datos-personales" style="color:#94a3b8;text-decoration:none;">Autorización de datos personales</a>
+    <a href="/legal/autorizacion-datos-personales">Autorización de datos personales</a>
    </nav>
   </footer>
+
+  <!-- BOTÓN FLOTANTE DE WHATSAPP -->
+  <a id="whatsapp-float" href="https://wa.me/573019028063?text=Hola%2C%20tengo%20una%20pregunta%20sobre%20mi%20declaraci%C3%B3n%20de%20renta"
+     target="_blank" rel="noopener" aria-label="Escribir por WhatsApp"
+     class="fixed right-4 md:right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-xl transition hover:scale-110 hover:bg-[#1ebe5b] no-underline">
+   <i data-lucide="message-circle" width="26" height="26"></i>
+  </a>
+
+  <style>
+    #whatsapp-float { bottom: 1.5rem; animation: wa-pulse 2.5s infinite; }
+    @keyframes wa-pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(37,211,102,.5); }
+      50% { box-shadow: 0 0 0 10px rgba(37,211,102,0); }
+    }
+  </style>
