@@ -15,20 +15,20 @@
 <link rel="icon" type="image/svg+xml" href="/assets/img/logo-mark.svg">
   <script src="https://cdn.jsdelivr.net/npm/tailwindcss-cdn@3.4.10/tailwindcss.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Lora:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --ink:#0b1f33; --blue:#123c69; --teal:#0b7a75; --orange:#eb8a28; --mist:#edf4f4; --line:#d7e2e5;
-      --teal-glow: rgba(11,122,117,.35); --orange-glow: rgba(235,138,40,.4);
+      --ink:#0e1a2b; --blue:#123c69; --teal:#0b7a75; --orange:#c2571c; --mist:#efe9dd; --line:#d7e2e5;
+      --teal-glow: rgba(11,122,117,.35); --orange-glow: rgba(194,87,28,.4);
     }
     * { box-sizing:border-box; }
     html { scroll-behavior:smooth; }
-    body { margin:0; font-family:"DM Sans",sans-serif; color:var(--ink); background-color:#f8fafc; }
-    .display-font { font-family:"Lora","DM Sans",serif; letter-spacing:-0.01em; }
+    body { margin:0; font-family:"IBM Plex Sans",sans-serif; color:var(--ink); background-color:#f7f4ee; }
+    .display-font { font-family:"Fraunces","IBM Plex Sans",serif; letter-spacing:-0.01em; }
 
     .hero-pattern {
-      position: relative; overflow: hidden; background-color:#0b1f33;
-      background-image: radial-gradient(circle at 85% 20%, rgba(235,138,40,.25), transparent 35%), linear-gradient(135deg, rgba(11,122,117,.4), transparent 50%);
+      position: relative; overflow: hidden; background-color:#0e1a2b;
+      background-image: radial-gradient(circle at 85% 20%, rgba(194,87,28,.25), transparent 35%), linear-gradient(135deg, rgba(11,122,117,.4), transparent 50%);
     }
     .hero-blob {
       position: absolute; border-radius: 9999px; filter: blur(48px); opacity: .55; pointer-events: none;
@@ -46,10 +46,10 @@
     .grid-lines { background-image:linear-gradient(rgba(18,60,105,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(18,60,105,.04) 1px,transparent 1px); background-size:24px 24px; }
 
     .card-hover { transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.35s ease, border-color 0.35s ease; }
-    .card-hover:hover { transform: translateY(-6px); box-shadow: 0 22px 40px -12px rgba(11,122,117,.25), 0 8px 16px -8px rgba(11,31,51,.15); border-color: #0b7a75; }
+    .card-hover:hover { transform: translateY(-6px); box-shadow: 0 22px 40px -12px rgba(11,122,117,.25), 0 8px 16px -8px rgba(14,26,43,.15); border-color: #0b7a75; }
 
     .btn-pulse { animation: pulse-subtle 2s infinite; }
-    @keyframes pulse-subtle { 0%,100% { transform: scale(1); box-shadow: 0 4px 20px rgba(235,138,40,.3); } 50% { transform: scale(1.02); box-shadow: 0 8px 32px rgba(235,138,40,.55); } }
+    @keyframes pulse-subtle { 0%,100% { transform: scale(1); box-shadow: 0 4px 20px rgba(194,87,28,.3); } 50% { transform: scale(1.02); box-shadow: 0 8px 32px rgba(194,87,28,.55); } }
     .btn-shine { position: relative; overflow: hidden; }
     .btn-shine::after { content:""; position:absolute; top:0; left:-75%; width:50%; height:100%; background:linear-gradient(120deg, transparent, rgba(255,255,255,.55), transparent); transform: skewX(-20deg); transition: left .6s ease; }
     .btn-shine:hover::after { left: 125%; }
@@ -63,21 +63,41 @@
     .mobile-cta-bar {
       position: fixed; left: 0; right: 0; bottom: 0; z-index: 60;
       transform: translateY(110%); transition: transform .35s ease;
-      background: #0b1f33; border-top: 1px solid rgba(255,255,255,.08);
+      background: #0e1a2b; border-top: 1px solid rgba(255,255,255,.08);
       padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
     }
     @supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
-      .mobile-cta-bar { background: rgba(11,31,51,.92); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+      .mobile-cta-bar { background: rgba(14,26,43,.92); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
     }
     .mobile-cta-bar.show { transform: translateY(0); }
     @media (min-width: 768px) { .mobile-cta-bar { display: none; } }
   </style>
 
+  <style>
+    :root{
+      --paper:#f7f4ee; --paper-2:#efe9dd; --rule:#d8d0bd; --accent:#c2571c;
+      --ink-soft:#4a5261;
+    }
+    .wrap{max-width:1180px;margin:0 auto;padding-inline:clamp(20px,4vw,64px);}
+
+    header.site-header{background:rgba(247,244,238,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--rule);position:sticky;top:0;z-index:50;}
+    .navrow{display:flex;align-items:center;justify-content:space-between;padding-block:16px;gap:16px;flex-wrap:wrap;}
+    .brand{display:flex;align-items:center;gap:10px;font-family:"Fraunces",serif;font-weight:600;font-size:19px;text-decoration:none;color:var(--ink);}
+    header.site-header nav{display:flex;gap:24px;font-size:14px;}
+    header.site-header nav a{text-decoration:none;color:var(--ink);border-bottom:1px solid transparent;padding-bottom:2px;font-weight:400;}
+    header.site-header nav a:hover{border-color:var(--accent);}
+    .cta-mini{font-family:"IBM Plex Mono",monospace;font-size:12.5px;text-decoration:none;border:1px solid var(--ink);padding:9px 16px;border-radius:2px;white-space:nowrap;color:var(--ink);}
+    .cta-mini:hover{background:var(--ink);color:var(--paper);}
+    .plazo-tab{font-family:"IBM Plex Mono",monospace !important;font-size:12px !important;color:var(--accent) !important;border-bottom:1px dashed var(--accent) !important;padding-bottom:2px;}
+    .legal-nav a{color:#94a3b8;text-decoration:none;}
+    .legal-nav a:hover{color:#ffffff;}
+
+  </style>
 
   <style>
     .prose-article { color: #1e293b; line-height: 1.75; }
     .prose-article h1, .prose-article h2, .prose-article h3 {
-      font-family: "Lora", "DM Sans", serif; color: #0b1f33; font-weight: 700;
+      font-family: "Fraunces", "IBM Plex Sans", serif; color: #0e1a2b; font-weight: 700;
       margin-top: 1.8em; margin-bottom: 0.6em; letter-spacing: -0.01em;
     }
     .prose-article h1 { font-size: 1.75rem; } .prose-article h2 { font-size: 1.4rem; } .prose-article h3 { font-size: 1.15rem; }
@@ -85,30 +105,32 @@
     .prose-article a { color: #0b7a75; text-decoration: underline; }
     .prose-article ul, .prose-article ol { margin: 1em 0; padding-left: 1.4em; }
     .prose-article li { margin: 0.4em 0; }
-    .prose-article blockquote { border-left: 3px solid #eb8a28; padding-left: 1em; color: #475569; font-style: italic; margin: 1.2em 0; }
+    .prose-article blockquote { border-left: 3px solid #c2571c; padding-left: 1em; color: #475569; font-style: italic; margin: 1.2em 0; }
     .prose-article img { border-radius: 0.75rem; margin: 1.2em 0; max-width: 100%; }
-    .prose-article code { background: #edf4f4; padding: 0.15em 0.4em; border-radius: 0.3em; font-size: 0.9em; }
-    .prose-article pre { background: #0b1f33; color: #e2e8f0; padding: 1em; border-radius: 0.75em; overflow-x: auto; }
+    .prose-article code { background: #efe9dd; padding: 0.15em 0.4em; border-radius: 0.3em; font-size: 0.9em; }
+    .prose-article pre { background: #0e1a2b; color: #e2e8f0; padding: 1em; border-radius: 0.75em; overflow-x: auto; }
     .prose-article hr { border: none; border-top: 1px solid #d7e2e5; margin: 2em 0; }
   </style>
 
   
  </head>
- <body class="w-full text-slate-900 antialiased bg-[#f8fafc]">
-    <header class="w-full bg-[#0b1f33] px-4 py-4 border-b border-white/10 sticky top-0 z-50 backdrop-blur-md bg-opacity-95">
-   <nav class="mx-auto flex max-w-6xl items-center justify-between gap-4">
-    <a href="/" class="display-font flex items-center gap-2.5 text-white no-underline font-bold text-lg">
-     <svg class="h-10 w-10 rounded-xl shadow-md shrink-0" viewBox="0 0 96 96" role="img" aria-label="Impuestamente"><defs><clipPath id="hdrLogoClip"><circle cx="48" cy="48" r="42"/></clipPath></defs><g clip-path="url(#hdrLogoClip)"><rect width="96" height="96" fill="#123c69"/><polygon points="0,0 96,0 0,96" fill="#0b1f33"/></g><path d="M20 32 A30 30 0 0 1 74 30" stroke="#ffffff" stroke-width="3" opacity="0.14" fill="none" stroke-linecap="round"/><rect x="41" y="34" width="14" height="32" rx="7" fill="#eb8a28"/><circle cx="48" cy="20" r="7.5" fill="#eb8a28"/><circle cx="45.5" cy="17.5" r="2.2" fill="#ffffff" opacity="0.45"/></svg>
-     <span>Impuesta<span class="text-[#eb8a28]">mente</span></span>
+ <body class="w-full text-slate-900 antialiased bg-[#f7f4ee]">
+    <header class="site-header">
+   <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 navrow wrap" style="padding-inline:16px;">
+    <a href="/" class="brand">
+     <svg width="26" height="26" viewBox="0 0 96 96" role="img" aria-label="Impuestamente"><circle cx="48" cy="48" r="40" fill="#fffdf8" stroke="#123c69" stroke-width="5"/><rect x="41" y="34" width="14" height="32" rx="7" fill="#0e1a2b"/><circle cx="48" cy="20" r="7.5" fill="#c2571c"/><circle cx="45.5" cy="17.5" r="2.2" fill="#ffffff" opacity="0.55"/></svg>
+     <span>Impuestamente</span>
     </a>
-    <div class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-300">
-     <a href="/#servicios" class="no-underline hover:text-white transition">Servicios</a>
-     <a href="/#sobre-mi" class="no-underline hover:text-white transition">Sobre mí</a>
-     <a href="/blog" class="no-underline hover:text-white transition">Blog</a>
-     <a href="/#contacto" class="no-underline hover:text-white transition">Contacto</a>
-    </div>
-    <a href="/calculadora-renta" class="rounded-full bg-[#0b7a75] px-4 py-2 text-xs md:text-sm font-bold text-white no-underline transition hover:bg-[#09635f] shadow-sm">Diagnóstico Gratis</a>
-   </nav>
+    <nav class="hidden md:flex">
+     <a href="/#diagnostico">Diagnóstico</a>
+     <a href="/#servicios">Servicios</a>
+     <a href="/#metodo">Método</a>
+     <a href="/#sobre-mi">Sobre mí</a>
+     <a href="/blog">Blog</a>
+     <a href="/#plazo" class="plazo-tab">¿No sabes tu plazo? Pruébalo aquí →</a>
+    </nav>
+    <a href="/calculadora-renta" class="cta-mini">Evaluar mi situación</a>
+   </div>
   </header>
 
   <main>
@@ -116,7 +138,7 @@
    <section class="w-full px-4 py-12 md:py-16">
     <div class="mx-auto max-w-6xl">
      <span class="text-xs font-bold uppercase tracking-widest text-[#0b7a75]">Actualidad Tributaria</span>
-     <h1 class="display-font mt-2 text-2xl md:text-4xl font-bold text-[#0b1f33]">Blog</h1>
+     <h1 class="display-font mt-2 text-2xl md:text-4xl font-bold text-[#0e1a2b]">Blog</h1>
      <p class="mt-2 text-slate-600 text-sm md:text-base">Guías y análisis sobre declaración de renta y planeación tributaria en Colombia.</p>
      <div class="mt-8 grid gap-6 md:grid-cols-3">
       
@@ -124,7 +146,7 @@
        <div class="h-40 bg-slate-100 " style="background-image:url('/blog/images/por-que-asalariados-pagan-mas-impuesto-renta-colombia.jpg');background-size:cover;background-position:center;"></div>
        <div class="p-5">
         
-        <h3 class="display-font mt-1 font-bold text-[#0b1f33]">¿Por qué los asalariados son los que más pagan impuesto de renta en Colombia?</h3>
+        <h3 class="display-font mt-1 font-bold text-[#0e1a2b]">¿Por qué los asalariados son los que más pagan impuesto de renta en Colombia?</h3>
         <p class="mt-2 text-xs text-slate-500">Una variabilidad del por qué los asalariados son los que más pagan impuesto de renta en Colombia, dando una guia y recomendaciones de como lograr aprovechar al maximo las deducciones y fomentar el ahorro via impuestos.</p>
        </div>
       </a>
@@ -132,17 +154,32 @@
     </div>
    </section>
   </main>
-  <footer class="w-full bg-[#0b1f33] px-4 py-10 border-t border-slate-800 text-center text-xs text-slate-400">
-   <p class="display-font text-white font-bold text-sm mb-2">Impuesta<span class="text-[#eb8a28]">mente</span></p>
+  <footer class="w-full bg-[#0e1a2b] px-4 py-10 border-t border-slate-800 text-center text-xs text-slate-400">
+   <p class="display-font text-white font-bold text-sm mb-2">Impuesta<span class="text-[#c2571c]">mente</span></p>
    <p>© 2026 Impuestamente. Contenido informativo, no constituye asesoría formal sin un contrato de servicios.</p>
-   <nav class="mt-4 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[11px]" aria-label="Legal">
-    <a href="/legal/terminos-y-condiciones" style="color:#94a3b8;text-decoration:none;">Términos y condiciones</a>
+   <nav class="legal-nav mt-4 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[11px]" aria-label="Legal">
+    <a href="/legal/terminos-y-condiciones">Términos y condiciones</a>
     <span class="text-slate-600">·</span>
-    <a href="/legal/politica-tratamiento-datos" style="color:#94a3b8;text-decoration:none;">Política de tratamiento de datos</a>
+    <a href="/legal/politica-tratamiento-datos">Política de tratamiento de datos</a>
     <span class="text-slate-600">·</span>
-    <a href="/legal/autorizacion-datos-personales" style="color:#94a3b8;text-decoration:none;">Autorización de datos personales</a>
+    <a href="/legal/autorizacion-datos-personales">Autorización de datos personales</a>
    </nav>
   </footer>
+
+  <!-- BOTÓN FLOTANTE DE WHATSAPP -->
+  <a id="whatsapp-float" href="https://wa.me/573019028063?text=Hola%2C%20tengo%20una%20pregunta%20sobre%20mi%20declaraci%C3%B3n%20de%20renta"
+     target="_blank" rel="noopener" aria-label="Escribir por WhatsApp"
+     class="fixed right-4 md:right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-xl transition hover:scale-110 hover:bg-[#1ebe5b] no-underline">
+   <i data-lucide="message-circle" width="26" height="26"></i>
+  </a>
+
+  <style>
+    #whatsapp-float { bottom: 1.5rem; animation: wa-pulse 2.5s infinite; }
+    @keyframes wa-pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(37,211,102,.5); }
+      50% { box-shadow: 0 0 0 10px rgba(37,211,102,0); }
+    }
+  </style>
 
   <script>
     document.addEventListener("DOMContentLoaded", () => { if (window.lucide) lucide.createIcons(); });
